@@ -9,16 +9,19 @@
 
 #include "JoystickDriver.c"
 
-task main()
+task main() //Main task for code
 {
 	while(true)
-	{
-		getJoystickSettings(joystick);
+ 	{
+		//Get joystick settings and positions
+        getJoystickSettings(joystick);
 
-		motor[leftWheel1] = joystick.joy1_y1;
+		//Set left wheels
+        motor[leftWheel1] = joystick.joy1_y1;
 		motor[leftWheel2] = joystick.joy1_y1;
 		motor[leftWheel3] = joystick.joy1_y1;
 
+        //Set right wheels
 		motor[rightWheel1 = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
 		motor[rightWheel3] = joystick.joy1_y2;
