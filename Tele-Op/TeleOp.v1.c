@@ -14,14 +14,14 @@ task main() //Main task for code
 	while(true)
  	{
 		//Get joystick settings and positions
-        getJoystickSettings(joystick);
+                getJoystickSettings(joystick);
 
 		//Set left wheels
-        motor[leftWheel1] = joystick.joy1_y1;
+	        motor[leftWheel1] = joystick.joy1_y1;
 		motor[leftWheel2] = joystick.joy1_y1;
 		motor[leftWheel3] = joystick.joy1_y1;
 
-        //Set right wheels
+                //Set right wheels
 		motor[rightWheel1 = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
 		motor[rightWheel3] = joystick.joy1_y2;
