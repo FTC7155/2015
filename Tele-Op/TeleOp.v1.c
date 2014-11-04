@@ -31,7 +31,7 @@ task main() //Main task for code
 		motor[leftWheel3] = joystick.joy1_y1;
 
         //Set right wheels
-		motor[rightWheel1 = joystick.joy1_y2;
+		motor[rightWheel1] = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
 		motor[rightWheel3] = joystick.joy1_y2;
 
