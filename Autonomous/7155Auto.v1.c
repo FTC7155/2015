@@ -29,45 +29,54 @@
 public bool startOnRamp = true;
 
 //Converts meters to an encoder value
+//#Needs Calibration#//
 float toInches (float inches){
     
 }
 
-
+//Used to turn a number of degrees
+//#Needs Calibration#//
 void turn(int degrees) {
     
 }
 
+//Sets all of the left wheels to a value
 void setAllLeftMotors (float speed) {
     motor[leftWheel1] = speed;
     motor[leftwheel2] = speed;
 }
 
+//Sets all of the right wheels to a value
 void setAllRightMotors (float speed) {
     motor[rightWheel1] = speed;
     motor[rightwheel2] = speed;
 }
 
+//Sets all of the wheels to a value
 void setAllMotors(float speed) {
     setAllLeftMotors(speed);
     setAllRightMotors(speed);
 }
 
+//Used to tell the robot to drive a certain distance
 void drive (float inches) {
     setAllMotors(100);
     wait1MSec(toInches(inches));
     setAllMotors(0);
 }
 
+//Used to drive off the ramp, activated by the public boolean instance field, startOnRamp
 void driveOffRamp() {
     drive(70);
     turn(-90);
     drive(47);
 }
 
+//Used to drive to the IR Beacon
+//#Needs Calibration#//
 void driveToIR() {
-    while()
-        while(sensor[leftIR]=0 || sensor[rightIR]=0)
+    while(sensor[leftIR]!=7 && sensor[rightIR]!=3){
+        while(sensor[leftIR]=0 || sensor[rightIR]=0) {
             setAllLeftMotors(-50);
             setAllRightMotors(50);
         }
@@ -81,10 +90,25 @@ void driveToIR() {
         }
         setAllMotors(50);
     }
+    
 }
+
+//Deposit the balls into the high goal on the center field structure.s
+void depositBalls () {
+    
+}
+
+
 
 task main() {
     if(startOnRamp)
         driveOffRamp();
+    driveToIR();
+    depositBalls();
+    knockBallsDown();
+    moveToGoal();
+    pickUpGoal();
+    moveGoalToZone();
+    
     
 }
