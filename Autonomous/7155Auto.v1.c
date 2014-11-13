@@ -94,11 +94,24 @@ void driveToIR() {
 }
 
 //Deposit the balls into the high goal on the center field structure.s
-void depositBalls () {
+void depositBalls() {
     
 }
 
+//Move to the goal so we can pick it up
+void moveToGoal() {
 
+}
+
+//pick up the goal
+void pickUpGoal() {
+
+}
+
+//move the goal to the parking zone
+void moveGoalToZone() {
+
+}
 
 task main() {
     if(startOnRamp)
@@ -109,6 +122,5 @@ task main() {
     moveToGoal();
     pickUpGoal();
     moveGoalToZone();
-    
     
 }
