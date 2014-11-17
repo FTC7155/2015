@@ -37,8 +37,8 @@ task main() //Main task for code
    	//set motor speeds
     //makes sure that we are converting the 127 point signal
     //from the joystick to the 100 point signal used by the robot
-    float rightWheels = joystick.joy1_y1/100;
-    float leftWheels = joystick.joy1_y2/100;
+    float rightWheels = joystick.joy1_y1*(100/127);
+    float leftWheels = joystick.joy1_y2*(100/127);
 
 		//Set left wheels
     motor[leftWheel1] = leftWheels;
