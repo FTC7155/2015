@@ -31,7 +31,7 @@ public bool startOnRamp = true;
 //Converts meters to an encoder value
 //#Needs Calibration#//
 float toInches (float inches){
-    
+   
 }
 
 //Used to turn a number of degrees
@@ -95,22 +95,22 @@ void driveToIR() {
 
 //Deposit the balls into the high goal on the center field structure.s
 void depositBalls() {
-    
+    //Jack
 }
 
 //Move to the goal so we can pick it up
 void moveToGoal() {
-
+    //Sebastian
 }
 
 //pick up the goal
-void pickUpGoal() {
-
+void hookUpGoal() {
+    //Jewoo
 }
 
 //move the goal to the parking zone
 void moveGoalToZone() {
-
+    //Alex
 }
 
 task main() {
@@ -120,7 +120,7 @@ task main() {
     depositBalls();
     knockBallsDown();
     moveToGoal();
-    pickUpGoal();
+    hookUpGoal();
     moveGoalToZone();
     
 }
