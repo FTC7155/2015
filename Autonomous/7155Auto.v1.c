@@ -117,7 +117,7 @@ void hookUpGoal() {
 //unhook the goal from the robot
 void unhookGoal() {
 	servo[hook]=90;
-)
+}
 
 //move the goal to the parking zone
 void moveGoalToZone() {
