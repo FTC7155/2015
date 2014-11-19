@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////// Harvard-Westlake Middle School Robotics Team              /////////////
 ///////////// FTC7155                                                   /////////////
-///////////// Tele-Op Code                                              /////////////
+///////////// Autonomous Code                                           /////////////
 /////////////                                                           /////////////
 ///////////// Authors:  Jonathan Damico, Nomi Ringoach, Sebastian Ko    /////////////
 /////////////           Jack Reily, Alex Kahn                           /////////////
