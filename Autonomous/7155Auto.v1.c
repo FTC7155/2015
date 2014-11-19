@@ -1,3 +1,9 @@
+task main()
+{
+	motor [motorB] = 100;
+	motor [motorC] = 64;
+	wait1Msec (100000);
+}
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  HTMotor,  none,     none)
@@ -31,13 +37,13 @@ public bool startOnRamp = true;
 //Converts meters to an encoder value
 //#Needs Calibration#//
 float toInches (float inches){
-   
+
 }
 
 //Used to turn a number of degrees
 //#Needs Calibration#//
 void turn(int degrees) {
-    
+
 }
 
 //Sets all of the left wheels to a value
@@ -90,7 +96,7 @@ void driveToIR() {
         }
         setAllMotors(50);
     }
-    
+
 }
 
 //Deposit the balls into the high goal on the center field structure.s
@@ -101,6 +107,8 @@ void depositBalls() {
 //Move to the goal so we can pick it up
 void moveToGoal() {
     //Sebastian
+	turn (135)
+	drive(23)
 }
 
 //pick up the goal
@@ -122,5 +130,5 @@ task main() {
     moveToGoal();
     hookUpGoal();
     moveGoalToZone();
-    
+
 }
