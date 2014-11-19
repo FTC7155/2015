@@ -106,23 +106,22 @@ void depositBalls() {
 
 //Move to the goal so we can pick it up
 void moveToGoal() {
-    //Kim Jung Ko
+    //Sebastian
 }
 
 //pick up the goal
 void hookUpGoal() {
 	servo[hook]=180;
-    //Jewoo is da best
 }
 
+//unhook the goal from the robot
 void unhookGoal() {
-	 servo[hook]=90;
+	servo[hook]=90;
 )
-
 
 //move the goal to the parking zone
 void moveGoalToZone() {
-    //Alex is da worst
+	//Alex
 }
 
 task main() {
