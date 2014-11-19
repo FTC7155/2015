@@ -6,8 +6,8 @@
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C1_1,     motorF,        tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S2_C1_2,     motorG,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S2_C1_1,     motorLiftLeft, tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S2_C1_2,     motorLiftRight, tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_1,     leftWheel1,    tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S4_C1_2,     rightWheel1,   tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S4_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
@@ -31,13 +31,13 @@ public bool startOnRamp = true;
 //Converts meters to an encoder value
 //#Needs Calibration#//
 float toInches (float inches){
-   
+
 }
 
 //Used to turn a number of degrees
 //#Needs Calibration#//
 void turn(int degrees) {
-    
+
 }
 
 //Sets all of the left wheels to a value
@@ -90,12 +90,16 @@ void driveToIR() {
         }
         setAllMotors(50);
     }
-    
+
 }
 
 //Deposit the balls into the high goal on the center field structure.s
 void depositBalls() {
     //Jack
+//Make lift go up (Below)
+drive(36);
+wait1Msec(2000);
+drive(-36);
 }
 
 //Move to the goal so we can pick it up
@@ -122,5 +126,5 @@ task main() {
     moveToGoal();
     hookUpGoal();
     moveGoalToZone();
-    
+
 }
