@@ -1,9 +1,3 @@
-task main()
-{
-	motor [motorB] = 100;
-	motor [motorC] = 64;
-	wait1Msec (100000);
-}
 #pragma config(Hubs,  S1, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  HTMotor,  none,     none)
