@@ -58,6 +58,11 @@ void setAllMotors(float speed) {
     setAllRightMotors(speed);
 }
 
+void setAllLiftMotors (float Speed) {
+    motor[motorLiftLeft]=speed;
+    motor[motorLiftRight]=speed;
+}
+
 //Used to tell the robot to drive a certain distance
 void drive (float inches) {
     setAllMotors(100);
@@ -96,10 +101,10 @@ void driveToIR() {
 //Deposit the balls into the high goal on the center field structure.s
 void depositBalls() {
     //Jack
-//Make lift go up (Below)
-drive(36);
-wait1Msec(2000);
-drive(-36);
+    //Make lift go up (Below)
+    lift(36);
+    wait1Msec(2000);
+    lift(-36);
 }
 
 //Move to the goal so we can pick it up
