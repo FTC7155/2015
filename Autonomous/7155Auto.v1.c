@@ -116,6 +116,8 @@ void depositBalls() {
 //Move to the goal so we can pick it up
 void moveToGoal() {
     //Sebastian
+	turn (135);
+	drive(23);
 }
 
 //pick up the goal
