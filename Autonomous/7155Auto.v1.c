@@ -29,7 +29,12 @@
  Revised November 3, 2014
 */
 
+//IR Sensor Drivers
 #include "HTIRS2-driver.h"
+
+//SMUX
+#define leftIR     msensor_S3_1
+#define rightIR    msensor_S3_2
 
 //Change this depending if the robot is starting on the ramp or on the ground.
 public bool startOnRamp = true;
@@ -104,7 +109,7 @@ void driveToIR() {
 
 }
 
-//Deposit the balls into the high goal on the center field structure.s
+//Deposit the balls into the high goal on the center field structure.
 void depositBalls() {
     //Jack
     //Make lift go up (Below)
@@ -144,5 +149,6 @@ task main() {
     moveToGoal();
     hookUpGoal();
     moveGoalToZone();
+    unhookGoal();
 
 }
