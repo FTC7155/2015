@@ -59,13 +59,13 @@ void turn(int degrees) {
 //Sets all of the left wheels to a value
 void setAllLeftMotors (float speed) {
     motor[leftWheel1] = speed;
-    motor[leftwheel2] = speed;
+    motor[leftWheel2] = speed;
 }
 
 //Sets all of the right wheels to a value
 void setAllRightMotors (float speed) {
     motor[rightWheel1] = speed;
-    motor[rightwheel2] = speed;
+    motor[rightWheel2] = speed;
 }
 
 //Sets all of the wheels to a value
@@ -77,13 +77,13 @@ void setAllMotors(float speed) {
 //Sets all of the left wheels encoders to a value
 void setAllLeftMotorEncoders (float encoderValue) {
     nMotorEncoder[leftWheel1] = encoderValue;
-    nMotorEncoder[leftwheel2] = encoderValue;
+    nMotorEncoder[leftWheel2] = encoderValue;
 }
 
 //Sets all of the right wheel encoders to a value
 void setAllRightMotorEncoders (float encoderValue) {
     nMotorEncoder[rightWheel1] = encoderValue;
-    nMotorEncoder[rightwheel2] = encoderValue;
+    nMotorEncoder[rightWheel2] = encoderValue;
 }
 
 //Sets all of the base encoders to a value
@@ -95,13 +95,13 @@ void setAllMotorEncoders(float encoderValue) {
 //Sets all of the left wheels encoders to a value
 void setAllLeftMotorEncoderTargets (float target) {
     nMotorEncoderTarget[leftWheel1] = target;
-    nMotorEncoderTarget[leftwheel2] = target;
+    nMotorEncoderTarget[leftWheel2] = target;
 }
 
 //Sets all of the right wheel encoders to a value
-void setAllRightMotorEncoderTargets (float speed) {
+void setAllRightMotorEncoderTargets (float target) {
     nMotorEncoderTarget[rightWheel1] = target;
-    nMotorEncoderTarget[rightwheel2] = target;
+    nMotorEncoderTarget[rightWheel2] = target;
 }
 
 //Sets all of the base encoders to a value
@@ -135,16 +135,16 @@ void driveOffRamp() {
 //Used to drive to the IR Beacon
 //#Needs Calibration#//
 void driveToIR() {
-    while(sensor[leftIR]!=7 && sensor[rightIR]!=3){
-        while(sensor[leftIR]=0 || sensor[rightIR]=0) {
+    while(SensorValue[leftIR]!=7 && SensorValue[rightIR]!=3){
+        while(SensorValue[leftIR]==0 || SensorValue[rightIR]==0) {
             setAllLeftMotors(-50);
             setAllRightMotors(50);
         }
-        while(sensor[leftIR]<5 && sensor[leftIR]!=0) {
+        while(SensorValue[leftIR]<5 && SensorValue[leftIR]!=0) {
             setAllLeftMotors(-50);
             setAllRightMotors(50);
         }
-        while(sensor[rightIR]>5 && sensor[rightIR]!=0) {
+        while(SensorValue[rightIR]>5 && SensorValue[rightIR]!=0) {
             setAllLeftMotors(50);
             setAllRightMotors(-50);
         }
