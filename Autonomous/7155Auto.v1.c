@@ -42,7 +42,7 @@
 #define rightIR    msensor_S3_2
 
 //Change this depending if the robot is starting on the ramp or on the ground.
-public bool startOnRamp = true;
+bool startOnRamp = true;
 
 //Converts meters to an encoder value
 //#Needs Calibration#//
@@ -75,23 +75,40 @@ void setAllMotors(float speed) {
 }
 
 //Sets all of the left wheels encoders to a value
-void setAllLeftMotorEncoders (float speed) {
-    nMotorEncoder[leftWheel1] = speed;
-    nMotorEncoder[leftwheel2] = speed;
+void setAllLeftMotorEncoders (float encoderValue) {
+    nMotorEncoder[leftWheel1] = encoderValue;
+    nMotorEncoder[leftwheel2] = encoderValue;
 }
 
 //Sets all of the right wheel encoders to a value
-void setAllRightMotorEncoders (float speed) {
-    nMotorEncoder[rightWheel1] = speed;
-    nMotorEncoder[rightwheel2] = speed;
+void setAllRightMotorEncoders (float encoderValue) {
+    nMotorEncoder[rightWheel1] = encoderValue;
+    nMotorEncoder[rightwheel2] = encoderValue;
 }
 
 //Sets all of the base encoders to a value
-void setAllMotorEncoders(float speed) {
-    setAllLeftMotorEncoders(speed);
-    setAllRightMotorEncoders(speed);
+void setAllMotorEncoders(float encoderValue) {
+    setAllLeftMotorEncoders(encoderValue);
+    setAllRightMotorEncoders(encoderValue);
 }
 
+//Sets all of the left wheels encoders to a value
+void setAllLeftMotorEncoderTargets (float target) {
+    nMotorEncoderTarget[leftWheel1] = target;
+    nMotorEncoderTarget[leftwheel2] = target;
+}
+
+//Sets all of the right wheel encoders to a value
+void setAllRightMotorEncoderTargets (float speed) {
+    nMotorEncoderTarget[rightWheel1] = target;
+    nMotorEncoderTarget[rightwheel2] = target;
+}
+
+//Sets all of the base encoders to a value
+void setAllMotorEncoderTargets(float target) {
+    setAllLeftMotorEncoderTargets(target);
+    setAllRightMotorEncoderTargets(target);
+}
 
 //Sets both sides of lift motors to the desired speed
 void setAllLiftMotors (float speed) {
