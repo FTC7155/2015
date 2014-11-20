@@ -46,8 +46,8 @@ public bool startOnRamp = true;
 
 //Converts meters to an encoder value
 //#Needs Calibration#//
-float toInches (float inches){
-
+float toEncoderValues (float inches){
+    inches*=90;
 }
 
 //Used to turn a number of degrees
@@ -74,6 +74,25 @@ void setAllMotors(float speed) {
     setAllRightMotors(speed);
 }
 
+//Sets all of the left wheels encoders to a value
+void setAllLeftMotorEncoders (float speed) {
+    nMotorEncoder[leftWheel1] = speed;
+    nMotorEncoder[leftwheel2] = speed;
+}
+
+//Sets all of the right wheel encoders to a value
+void setAllRightMotorEncoders (float speed) {
+    nMotorEncoder[rightWheel1] = speed;
+    nMotorEncoder[rightwheel2] = speed;
+}
+
+//Sets all of the base encoders to a value
+void setAllMotorEncoders(float speed) {
+    setAllLeftMotorEncoders(speed);
+    setAllRightMotorEncoders(speed);
+}
+
+
 //Sets both sides of lift motors to the desired speed
 void setAllLiftMotors (float speed) {
     motor[leftLift]=speed;
@@ -82,8 +101,10 @@ void setAllLiftMotors (float speed) {
 
 //Used to tell the robot to drive a certain distance
 void drive (float inches) {
-    setAllMotors(100);
-    wait1MSec(toInches(inches));
+    setAllMotorEncoders(0);
+    setAllMotorEncoderTargets(toEncoderValues(inches));
+    setAllMotors(50);
+    while(nMotorRunState[leftWheel1] != runStateIdle) {}
     setAllMotors(0);
 }
 
