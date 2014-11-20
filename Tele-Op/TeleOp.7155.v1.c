@@ -1,17 +1,13 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  none,     none)
-#pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  HTMotor,  none,     none)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S4,     ,               sensorI2CMuxController)
-#pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_1,     rightLift,     tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C1_1,     leftLift,      tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S2_C1_2,     rightLift,     tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_1,     leftWheel1,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S4_C2_2,     motorK,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S4_C2_2,     leftLift,      tmotorTetrix, openLoop)
 #pragma config(Servo,  srvo_S1_C2_1,    hook,                 tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
@@ -58,12 +54,13 @@ task main() //Main task for code
 		motor[rightWheel1] = rightWheels;
 		motor[rightWheel2] = rightWheels;
 
-		if(joy1Btn(Btn8)){
-			motor[leftLift]=-100;
-			motor[rightLift]=-100;
-		} if(joy1Btn(Btn6)){
+		//TEMP - Control for lift
+		if(joy1Btn(Btn7)){
 			motor[leftLift]=100;
 			motor[rightLift]=100;
+		} if(joy1Btn(Btn5)){
+			motor[leftLift]=-100;
+			motor[rightLift]=-100;
 		} else {
 			motor[leftLift]=0;
 			motor[rightLift]=0;
