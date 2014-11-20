@@ -27,30 +27,29 @@
 
 #include "JoystickDriver.c"
 
-task main() //Main task for code
-{
+task main() { //Main task for code
+
 	waitForStart();
 
-	while(true)
- 	{
+	while(true) {
 
 		//Get joystick settings and positions
-    getJoystickSettings(joystick);
+        getJoystickSettings(joystick);
 
-   	//set motor speeds
-    //makes sure that we are converting the 127 point signal
-    //from the joystick to the 100 point signal used by the robot
-    float rightWheels = joystick.joy1_y2;
-    float leftWheels = joystick.joy1_y1;
+   	    //set motor speeds
+        //makes sure that we are converting the 127 point signal
+        //from the joystick to the 100 point signal used by the robot
+        float rightWheels = joystick.joy1_y2;
+        float leftWheels = joystick.joy1_y1;
 
-    //rightWheels *=100/128;
-    //leftWheels*=100/128;
+        //rightWheels *=100/128;
+        //leftWheels*=100/128;
 
 		//Set left wheels
-    motor[leftWheel1] = leftWheels;
+        motor[leftWheel1] = leftWheels;
 		motor[leftWheel2] = leftWheels;
 
-    //Set right wheels
+        //Set right wheels
 		motor[rightWheel1] = rightWheels;
 		motor[rightWheel2] = rightWheels;
 

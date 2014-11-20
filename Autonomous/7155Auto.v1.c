@@ -30,7 +30,7 @@
 /////////////           Jack Reily, Alex Kahn                           /////////////
 ///////////// Version:  1                                               /////////////
 ///////////// Since:    November 3, 2014                                /////////////
-///////////// Revised:  November 18, 2014                               /////////////
+///////////// Revised:  November 20, 2014                               /////////////
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -162,10 +162,10 @@ void depositBalls() {
     lift(-36);
 }
 
-//Move to the goal so we can pick it up
+//Move to the goal so we can pick it hookUpGoal
 void moveToGoal() {
     //Sebastian
-	turn (135);
+	turn(135);
 	drive(23);
 }
 
