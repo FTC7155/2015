@@ -65,8 +65,8 @@ task main() { //Main task for code
     float rightWheels = joystick.joy1_y2;
     float leftWheels = joystick.joy1_y1;
 
-    //rightWheels *=100/128;
-    //leftWheels*=100/128;
+    rightWheels *= leftWheels*sgn(leftWheels);
+    leftWheels *= leftWheels*sgn(leftWheels);
 
 		//Set left wheels
     motor[leftWheel1] = leftWheels;
