@@ -1,13 +1,11 @@
 #pragma config(Hubs,  S1, HTMotor,  HTServo,  none,     none)
 #pragma config(Hubs,  S2, HTMotor,  none,     none,     none)
 #pragma config(Hubs,  S4, HTMotor,  HTMotor,  none,     none)
-#pragma config(Sensor, S1,     ,               sensorI2CMuxController)
-#pragma config(Sensor, S2,     ,               sensorI2CMuxController)
-#pragma config(Sensor, S4,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S3,     SMUX,           sensorI2CCustom)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     rightWheel2,   tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C1_1,     leftLift, tmotorTetrix, PIDControl, encoder, reversed)
-#pragma config(Motor,  mtr_S2_C1_2,     rightLift, tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S2_C1_1,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
+#pragma config(Motor,  mtr_S2_C1_2,     rightLift,     tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S4_C1_1,     leftWheel1,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C1_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
@@ -35,11 +33,14 @@
 /////////////////////////////////////////////////////////////////////////////////////
 
 //IR Sensor Drivers
-#include "HTIRS2-driver.h"
+// #include "HTIRS2-driver.h"
+
+#include "drivers/hitechnic-sensormux.h"	// just files to make the SMUX work.
+#include "drivers/hitechnic-irseeker-v2.h"
 
 //SMUX prob wont work needs fixes
-#define leftIR     msensor_S3_1
-#define rightIR    msensor_S3_2
+const tMUXSensor leftIR = msensor_S3_1;
+const tMUXSensor rightIR = msensor_S3_2;
 
 //Change this depending if the robot is starting on the ramp or on the ground.
 bool startOnRamp = true;
