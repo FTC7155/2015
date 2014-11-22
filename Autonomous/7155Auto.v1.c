@@ -32,8 +32,6 @@
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-//IR Sensor Drivers
-// #include "HTIRS2-driver.h"
 
 #include "drivers/hitechnic-sensormux.h"	// just files to make the SMUX work.
 #include "drivers/hitechnic-irseeker-v2.h"
@@ -52,84 +50,97 @@ float toEncoderValues (float inches){
 	return(inches);
 }
 
-//Used to turn a number of degrees
-//#Needs Calibration#//
-void turn(int degrees) {
-
-}
-
 //Sets all of the left wheels to a value
 void setAllLeftMotors (float speed) {
-    motor[leftWheel1] = speed;
-    motor[leftWheel2] = speed;
+	motor[leftWheel1] = speed;
+	motor[leftWheel2] = speed;
 }
 
 //Sets all of the right wheels to a value
 void setAllRightMotors (float speed) {
-    motor[rightWheel1] = speed;
-    motor[rightWheel2] = speed;
+	motor[rightWheel1] = speed;
+	motor[rightWheel2] = speed;
 }
 
 //Sets all of the wheels to a value
 void setAllMotors(float speed) {
-    setAllLeftMotors(speed);
-    setAllRightMotors(speed);
+	setAllLeftMotors(speed);
+	setAllRightMotors(speed);
 }
 
 //Sets all of the left wheels encoders to a value
 void setAllLeftMotorEncoders (float encoderValue) {
-    nMotorEncoder[leftWheel1] = encoderValue;
-    nMotorEncoder[leftWheel2] = encoderValue;
+	nMotorEncoder[leftWheel1] = encoderValue;
+	nMotorEncoder[leftWheel2] = encoderValue;
 }
 
 //Sets all of the right wheel encoders to a value
 void setAllRightMotorEncoders (float encoderValue) {
-    nMotorEncoder[rightWheel1] = encoderValue;
-    nMotorEncoder[rightWheel2] = encoderValue;
+	nMotorEncoder[rightWheel1] = encoderValue;
+	nMotorEncoder[rightWheel2] = encoderValue;
 }
 
 //Sets all of the base encoders to a value
 void setAllMotorEncoders(float encoderValue) {
-    setAllLeftMotorEncoders(encoderValue);
-    setAllRightMotorEncoders(encoderValue);
+	setAllLeftMotorEncoders(encoderValue);
+	setAllRightMotorEncoders(encoderValue);
 }
 
 //Sets all of the left wheels encoders to a value
 void setAllLeftMotorEncoderTargets (float target) {
-    nMotorEncoderTarget[leftWheel1] = target;
-    nMotorEncoderTarget[leftWheel2] = target;
+	nMotorEncoderTarget[leftWheel1] = target;
+	nMotorEncoderTarget[leftWheel2] = target;
 }
 
 //Sets all of the right wheel encoders to a value
 void setAllRightMotorEncoderTargets (float target) {
-    nMotorEncoderTarget[rightWheel1] = target;
-    nMotorEncoderTarget[rightWheel2] = target;
+	nMotorEncoderTarget[rightWheel1] = target;
+	nMotorEncoderTarget[rightWheel2] = target;
 }
 
 //Sets all of the base encoders to a value
 void setAllMotorEncoderTargets(float target) {
-    setAllLeftMotorEncoderTargets(target);
-    setAllRightMotorEncoderTargets(target);
+	setAllLeftMotorEncoderTargets(target);
+	setAllRightMotorEncoderTargets(target);
 }
 
 //Sets both sides of lift motors to the desired speed
 void setAllLiftMotors (float speed) {
-    motor[leftLift]=speed;
-    motor[rightLift]=speed;
+	motor[leftLift]=speed;
+	motor[rightLift]=speed;
 }
 
 //Used to tell the robot to drive a certain distance
 void drive (float inches) {
-    setAllMotorEncoders(0);
-    setAllMotorEncoderTargets(toEncoderValues(inches));
-    setAllMotors(50);
-    while(nMotorRunState[leftWheel1] != runStateIdle) {}
-    setAllMotors(0);
+	setAllMotorEncoders(0);
+	setAllMotorEncoderTargets(toEncoderValues(inches));
+	setAllMotors(50);
+	while(nMotorRunState[leftWheel1] != runStateIdle) {}
+	setAllMotors(0);
 }
 
 void setAllLiftMotorEncoderTargets (int value) {
 	nMotorEncoderTarget[leftLift] = value;
 	nMotorEncoderTarget[rightLift] = value;
+}
+
+//Used to turn a number of degrees
+//#Needs Calibration#//
+void turn(int degrees) {
+	float distance = degrees/2*PI;
+	if(degrees>0){
+		nMotorEncoderTarget[leftWheel1] += distance;
+		nMotorEncoderTarget[rightWheel1] -= distance;
+		setAllLeftMotors(75);
+		setAllRightMotors(-75);
+	} else {
+		nMotorEncoderTarget[leftWheel1] -= distance;
+		nMotorEncoderTarget[rightWheel1] += distance;
+		setAllLeftMotors(-75);
+		setAllRightMotors(75);
+	}
+	while(nMotorRunState[leftWheel1]!=runStateIdle) {}
+	setAllMotors(0);
 }
 
 void lift (int position) {
@@ -146,46 +157,47 @@ void lift (int position) {
 	else
 		setAllLiftMotors(75);
 }
+
 //Used to drive off the ramp, activated by the public boolean instance field, startOnRamp
 void driveOffRamp() {
-    drive(70);
-    turn(-90);
-    drive(47);
+	drive(70);
+	turn(-90);
+	drive(47);
 }
 
 //Used to drive to the IR Beacon
 //#Needs Calibration#//
 void driveToIR() {
-    while(SensorValue[leftIR]!=7 && SensorValue[rightIR]!=3){
-        while(SensorValue[leftIR]==0 || SensorValue[rightIR]==0) {
-            setAllLeftMotors(-50);
-            setAllRightMotors(50);
-        }
-        while(SensorValue[leftIR]<5 && SensorValue[leftIR]!=0) {
-            setAllLeftMotors(-50);
-            setAllRightMotors(50);
-        }
-        while(SensorValue[rightIR]>5 && SensorValue[rightIR]!=0) {
-            setAllLeftMotors(50);
-            setAllRightMotors(-50);
-        }
-        setAllMotors(50);
-    }
+	while(SensorValue[leftIR]!=7 && SensorValue[rightIR]!=3){
+		while(SensorValue[leftIR]==0 || SensorValue[rightIR]==0) {
+			setAllLeftMotors(-50);
+			setAllRightMotors(50);
+		}
+		while(SensorValue[leftIR]<5 && SensorValue[leftIR]!=0) {
+			setAllLeftMotors(-50);
+			setAllRightMotors(50);
+		}
+		while(SensorValue[rightIR]>5 && SensorValue[rightIR]!=0) {
+			setAllLeftMotors(50);
+			setAllRightMotors(-50);
+		}
+		setAllMotors(50);
+	}
 
 }
 
 //Deposit the balls into the high goal on the center field structure.
 void depositBalls() {
-    //Jack
-    //Make lift go up (Below)
-    lift(36);
-    wait1Msec(2000);
-    lift(-36);
+	//Jack
+	//Make lift go up (Below)
+	lift(36);
+	wait1Msec(2000);
+	lift(-36);
 }
 
 //Move to the goal so we can pick it hookUpGoal
 void moveToGoal() {
-    //Sebastian
+	//Sebastian
 	turn(135);
 	drive(23);
 }
@@ -206,14 +218,14 @@ void moveGoalToZone() {
 }
 
 task main() {
-    if(startOnRamp)
-        driveOffRamp();
-    driveToIR();
-    depositBalls();
-    //knockBallsDown();
-    moveToGoal();
-    hookUpGoal();
-    moveGoalToZone();
-    unhookGoal();
+	if(startOnRamp)
+		driveOffRamp();
+	driveToIR();
+	depositBalls();
+	//knockBallsDown();
+	moveToGoal();
+	hookUpGoal();
+	moveGoalToZone();
+	unhookGoal();
 
 }
