@@ -48,7 +48,8 @@ bool startOnRamp = true;
 //Converts meters to an encoder value
 //#Needs Calibration#//
 float toEncoderValues (float inches){
-    inches*=90;
+	inches*=90;
+	return(inches);
 }
 
 //Used to turn a number of degrees
@@ -126,6 +127,25 @@ void drive (float inches) {
     setAllMotors(0);
 }
 
+void setAllLiftMotorEncoderTargets (int value) {
+	nMotorEncoderTarget[leftLift] = value;
+	nMotorEncoderTarget[rightLift] = value;
+}
+
+void lift (int position) {
+	int target;
+	if(position==1)
+		target=720;
+	else if(position==2)
+		target=1200;
+	else if(position==3)
+		target=2000;
+	setAllLiftMotorEncoderTargets(target);
+	if(nMotorEncoderTarget[leftLift]<nMotorEncoder[leftLift])
+		setAllLiftMotors(-75);
+	else
+		setAllLiftMotors(75);
+}
 //Used to drive off the ramp, activated by the public boolean instance field, startOnRamp
 void driveOffRamp() {
     drive(70);
@@ -190,7 +210,7 @@ task main() {
         driveOffRamp();
     driveToIR();
     depositBalls();
-    knockBallsDown();
+    //knockBallsDown();
     moveToGoal();
     hookUpGoal();
     moveGoalToZone();
