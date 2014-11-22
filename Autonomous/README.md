@@ -1,7 +1,7 @@
 Autonomous Code
 ============
 
-The Match starts with a 30-second Autonomous Period where Robots are operated via pre- programmed instructions only. 
+The Match starts with a 30-second Autonomous Period where Robots are operated via pre-programmed instructions only. 
 
 Prior to the start of the Autonomous Period, the Center Structure will be rotated to one of three positions. 
 Points will be awarded for Robots achieving certain tasks including placing Autonomous Balls in the Rolling Goal and/or Center Goal , Robots moving off the Platform, knocking over the kickstand (and releasing balls into the field of play), and moving their Rolling Goals into the Alliance’s Parking Zone.
