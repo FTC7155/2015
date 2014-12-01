@@ -233,6 +233,7 @@ void driveToCascade () {
 void driveBackFromCascade () {
 	turn(-180);
 	drive(36);
+	turn(-90);
 }
 
 task main() {
