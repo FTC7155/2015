@@ -35,7 +35,7 @@
 /////////////           Jack Reily, Alex Kahn                           /////////////
 ///////////// Version:  1                                               /////////////
 ///////////// Since:    November 3, 2014                                /////////////
-///////////// Revised:  November 20, 2014                               /////////////
+///////////// Revised:  December 1, 2014                               /////////////
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,6 +48,9 @@ const tMUXSensor rightIR = msensor_S3_2;
 
 //Change this depending if the robot is starting on the ramp or on the ground.
 bool startOnRamp = true;
+
+//Recursion
+int leftHistory[], rightHistory[], numberOfSteps, changeInTime;
 
 //Converts meters to an encoder value
 //#Needs Calibration#//
@@ -210,17 +213,20 @@ void moveToGoal() {
 
 //pick up the goal
 void hookUpGoal() {
-	servo[hook]=180;
+	servo[leftHook]=65;
+	servo[rightHook]=160;
 }
 
 //unhook the goal from the robot
 void unhookGoal() {
-	servo[hook]=90;
+	servo[leftHook]=155;
+	servo[rightHook]=65;
 }
 
 //move the goal to the parking zone
+//Alex
 void moveGoalToZone() {
-	//Alex
+	
 }
 
 void driveToCascade () {
@@ -236,15 +242,40 @@ void driveBackFromCascade () {
 	turn(-90);
 }
 
+/*
+Idea: It might be better to record the current endocer turns, and subtract on the way down.
+*/
+
+task recursionRecorder () {
+	int numberOfSteps = 0;
+	int changeInTime = 20;
+
+	while(true) {
+		leftHistory[numberOfSteps] = motor[leftWheel1];
+		rightHistory[numberOfSteps] = motor[rightWheel1];
+		numberOfSteps++;
+		wait1Msec(changeInTime);
+	}
+}
+
+void recursionPlayback () {
+	stopTask(recursionRecorder);
+	while(--numberOfSteps>0) {
+		setAllRightMotors(-rightHistory[numberOfSteps]);
+		setAllLeftMotors(-leftHistory[numberOfSteps]);
+		wait1Msec(changeInTime);
+	}
+}
+
 task main() {
 	if(startOnRamp)
 		driveOffRamp();
+	startTask(recursionRecorder);
 	driveToIR();
 	driveToCascade();
-	driveBackFromCascade();
+	recursionPlayback();
 	moveToGoal();
 	hookUpGoal();
 	moveGoalToZone();
 	unhookGoal();
-
 }
