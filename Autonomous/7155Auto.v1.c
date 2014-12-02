@@ -236,7 +236,7 @@ void unhookGoal() {
 //move the goal to the parking zone
 //Alex
 void moveGoalToZone() {
-
+	drive(32);
 }
 
 void driveToCascade () {
