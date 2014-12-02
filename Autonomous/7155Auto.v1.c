@@ -15,8 +15,8 @@
 #pragma config(Motor,  mtr_S4_C1_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S4_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S4_C2_2,     motorK,        tmotorTetrix, openLoop)
-#pragma config(Servo,  srvo_S1_C2_1,    hook,                 tServoStandard)
-#pragma config(Servo,  srvo_S1_C2_2,    servo2,               tServoNone)
+#pragma config(Servo,  srvo_S1_C2_1,    rightHook,            tServoStandard)
+#pragma config(Servo,  srvo_S1_C2_2,    leftHook,             tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_3,    servo3,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S1_C2_5,    servo5,               tServoNone)
@@ -35,7 +35,7 @@
 /////////////           Jack Reily, Alex Kahn                           /////////////
 ///////////// Version:  1                                               /////////////
 ///////////// Since:    November 3, 2014                                /////////////
-///////////// Revised:  December 1, 2014                               /////////////
+///////////// Revised:  December 1, 2014                                /////////////
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,11 +46,21 @@
 const tMUXSensor leftIR = msensor_S3_1;
 const tMUXSensor rightIR = msensor_S3_2;
 
-//Change this depending if the robot is starting on the ramp or on the ground.
-bool startOnRamp = true;
+//////////////////////////////////////////////////////////////////////////////////////
+/////									            AUTO SETUP				                             /////
+//////////////////////////////////////////////////////////////////////////////////////
+/////Change this depending if the robot is starting on the ramp or on the ground./////
+/* */bool startOnRamp = true;																									   /////
+/////																																						 /////
+/////Use this if we want to knock down the cascade.														   /////
+/* */bool knockDownCascade = true;																							 /////
+/////																																						 /////
+/////Set True if we want to score a goal.																				 /////
+/* */bool scoreInGoal = true;																										 /////
+//////////////////////////////////////////////////////////////////////////////////////
 
 //Recursion
-int leftHistory[], rightHistory[], numberOfSteps, changeInTime;
+int leftHistory[1], rightHistory[1], numberOfSteps, changeInTime;
 
 //Converts meters to an encoder value
 //#Needs Calibration#//
@@ -226,7 +236,7 @@ void unhookGoal() {
 //move the goal to the parking zone
 //Alex
 void moveGoalToZone() {
-	
+
 }
 
 void driveToCascade () {
@@ -268,14 +278,19 @@ void recursionPlayback () {
 }
 
 task main() {
+	bSystemLeaveServosEnabledOnProgramStop=true;
 	if(startOnRamp)
 		driveOffRamp();
-	startTask(recursionRecorder);
-	driveToIR();
-	driveToCascade();
-	recursionPlayback();
-	moveToGoal();
-	hookUpGoal();
-	moveGoalToZone();
-	unhookGoal();
+	if(knockDownCascade) {
+		startTask(recursionRecorder);
+		driveToIR();
+		driveToCascade();
+		recursionPlayback();
+	}
+	if(scoreInGoal) {
+		moveToGoal();
+		hookUpGoal();
+		moveGoalToZone();
+		unhookGoal();
+	}
 }
