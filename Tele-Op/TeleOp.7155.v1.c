@@ -77,15 +77,15 @@ task main() { //Main task for code
 		motor[rightWheel2] = rightWheels;
 
 		//TEMP - Control for lift
-		if(joy1Btn(Btn7)){
-			motor[leftLift]=100;
-			motor[rightLift]=100;
-		} if(joy1Btn(Btn5)){
-			motor[leftLift]=-100;
-			motor[rightLift]=-100;
+		if(joy1Btn(Btn5)){
+			motor[leftLift]=-127;
+			motor[rightLift]=127;
+		} else if(joy1Btn(Btn7)){
+			motor[leftLift]=50;
+			motor[rightLift]=-50;
 		} else {
-			motor[leftLift]=0;
-			motor[rightLift]=0;
+			motor[leftLift]=-5;
+			motor[rightLift]=5;
 		}
 
 	}
