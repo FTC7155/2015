@@ -22,7 +22,7 @@
 Harvard-Westlake Middle School Robotics Team
 FTC7155
 Tele-Op Code
-Authors: Jonathan Damico, Nomi Ringoach
+Authors: Jonathan Damico, Nomi Ringoach (who did absolutely nothing, except a random tab once...)
 Version 1
 Since November 3, 2014
 */
