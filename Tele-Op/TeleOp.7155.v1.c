@@ -59,29 +59,29 @@ task main() { //Main task for code
 
 	while(true) {
 
-		//Get joystick settings and positions
+		//Get joytick settings and positions
 		getJoystickSettings(joystick);
 
 
 		//Set left wheels
-			motor[leftWheel1] = joystick.joy1_y1;
-			motor[leftWheel2] = joystick.joy1_y1;
+		motor[leftWheel1] = joystick.joy1_y1;
+		motor[leftWheel2] = joystick.joy1_y1;
 
 		//Set right wheels
-			motor[rightWheel1] = joystick.joy1_y2;
-			motor[rightWheel2] = joystick.joy1_y2;
+		motor[rightWheel1] = joystick.joy1_y2;
+		motor[rightWheel2] = joystick.joy1_y2;
 
 		//Control for lift
-		if(joy1Btn(Btn5)){
+		/*if(joy1Btn(Btn5)){
 			motor[leftLift]=-127;
 			motor[rightLift]=127;
 			} else if(joy1Btn(Btn7)){
-			motor[leftLift]=50;
-			motor[rightLift]=-50;
+			motor[leftLift]=30;
+			motor[rightLift]=-30;
 			} else {
-			motor[leftLift]=-3;
-			motor[rightLift]=3;
-		}
+			motor[leftLift]=-5;
+			motor[rightLift]=5;
+		}*/
 
 		//Control for Intake
 		if(joy1Btn(Btn6)){
