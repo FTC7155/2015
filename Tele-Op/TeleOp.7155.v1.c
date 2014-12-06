@@ -48,8 +48,8 @@ task hook () {
 			//while(joy1Btn(Btn2)) {}
 			wait1Msec(300);
 			} if(joy1Btn(Btn2)&&hookUp) {
-			servo[leftHook]=65;
-			servo[rightHook]=160;
+			servo[leftHook]=50;
+			servo[rightHook]=173;
 			hookUp=false;
 			//while(joy1Btn(Btn2)) {}
 			wait1Msec(300);

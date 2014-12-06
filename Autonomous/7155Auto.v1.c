@@ -4,8 +4,8 @@
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Motor,  motorA,          rightIntake,   tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftIntake,    tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S2_C1_1,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C1_2,     rightLift,     tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
@@ -109,7 +109,7 @@ void setAllMotorEncoderTargets(int target) {
 
 //Sets both sides of lift motors to the desired speed
 void setAllLiftMotors (float speed) {
-	motor[leftLift]=speed;
+	motor[leftLift]=-speed;
 	motor[rightLift]=speed;
 }
 
@@ -119,12 +119,12 @@ void drive (int target) {
 	if(target>0){
 		setAllMotors(30);
 		while((nMotorEncoder[leftWheel1] < target) && (nMotorEncoder[rightWheel1] < target)) {
-			if(nMotorEncoder[leftWheel1]>nMotorEncoder[rightWheel1]) {
-				motor[leftWheel1]+=10;
-				motor[leftWheel2]+=10;
-				} else if(nMotorEncoder[leftWheel1]<nMotorEncoder[rightWheel1]) {
+			if(nMotorEncoder[leftWheel1]<nMotorEncoder[rightWheel1]) {
 				motor[rightWheel1]+=10;
 				motor[rightWheel2]+=10;
+				} else if(nMotorEncoder[leftWheel1]>nMotorEncoder[rightWheel1]) {
+				motor[leftWheel1]+=10;
+				motor[leftWheel2]+=10;
 				} else {
 				setAllMotors(30);
 			}
@@ -286,8 +286,32 @@ void recursionPlayback () {
 }
 
 task main() {
+	nMotorEncoder[leftLift] = 0;
+	nMotorEncoder[rightLift] = 0;
+	while(nMotorEncoder[leftLift]>-100) {
+		motor[leftLift]=-127;
+		motor[rightLift]=127;
+	}
+	motor[leftLift] = 0;
+	motor[rightLift] = 0;
+	setAllMotors(127);
+	wait1Msec(1500);
+	setAllMotors(50);
+	wait1Msec(200);
+	setAllMotors(0);
+	while(nMotorEncoder[leftLift]>-3000) {
+		setAllLiftMotors(127);
+	}
+	setAllLiftMotors(0);
+	setAllMotors(20);
+	wait1Msec(1200);
+	setAllMotors(0);
+	motor[leftIntake] = -60;
+	motor[rightIntake] = -60;
+	wait1Msec(1500);
+	motor[leftIntake] = 0;
+	motor[rightIntake] = 0;
 
-	drive(500    );
 	//driveOffRamp();
 	/*
 	bSystemLeaveServosEnabledOnProgramStop=true;
