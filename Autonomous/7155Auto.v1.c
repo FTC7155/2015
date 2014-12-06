@@ -331,7 +331,6 @@ task main() {
 	servo[rightHook]=173;
 	setAllMotors(50);
 	wait1Msec(2200);
-	playSound(soundBlip);
 	setAllMotors(10);
 	wait1Msec(30000);
 

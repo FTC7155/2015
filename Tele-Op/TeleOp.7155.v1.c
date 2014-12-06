@@ -36,18 +36,28 @@ const tMUXSensor leftIR = msensor_S3_3;
 const tMUXSensor rightIR = msensor_S3_1;
 const tMUXSensor touch = msensor_S3_2;
 
+//Task to control all the movement of the hook for the robot during tele-op
 task hook () {
-	//Hook
+
+	//Boolean statement to determine if the hook is up. Initilization.
 	bool hookUp = false;
+
+	//Loop this part of the code forever
 	while(true) {
+
+		//Update the Joysticks
 		getJoystickSettings(joystick);
-		if(joy1Btn(Btn2)&&!hookUp) {
-			servo[leftHook]=155;
-			servo[rightHook]=65;
-			hookUp=true;
-			//while(joy1Btn(Btn2)) {}
-			wait1Msec(300);
-			} if(joy1Btn(Btn2)&&hookUp) {
+
+		//Put hook up
+		if(joy1Btn(Btn2)&&!hookUp) { 	//If the A Button is pressed, and the hook isn't up
+			servo[leftHook]=155;				//Set left hook to up position
+			servo[rightHook]=65;				//Set right hook to up position
+			hookUp=true;								//Tell the program that the hook is up
+			wait1Msec(300);							//Wait so that we can give the hook time to go up, and so the button doesn't get "stuck"
+		}
+
+		//Put hook down
+		if(joy1Btn(Btn2)&&hookUp) {
 			servo[leftHook]=50;
 			servo[rightHook]=173;
 			hookUp=false;
@@ -57,6 +67,7 @@ task hook () {
 	}
 }
 
+//UNUSED - Test control for the lift
 task lift () {
 	int height = 1;
 	int liftTarget;
@@ -126,8 +137,8 @@ task intake () {
 			liftCondition = true;
 			wait1Msec(300);
 			} else if(joy1Btn(Btn8) && !liftCondition) {
-			motor[leftIntake] = -80;
-			motor[rightIntake] = -80;
+			motor[leftIntake] = -50;
+			motor[rightIntake] = -50;
 			liftCondition = true;
 			wait1Msec(300);
 			} else if (liftCondition && (joy1Btn(Btn8) || joy1Btn(Btn6))){
