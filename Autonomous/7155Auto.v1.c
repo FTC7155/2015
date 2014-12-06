@@ -288,29 +288,52 @@ void recursionPlayback () {
 task main() {
 	nMotorEncoder[leftLift] = 0;
 	nMotorEncoder[rightLift] = 0;
-	while(nMotorEncoder[leftLift]>-100) {
+	while(nMotorEncoder[leftLift]>-300) {
 		motor[leftLift]=-127;
 		motor[rightLift]=127;
 	}
 	motor[leftLift] = 0;
 	motor[rightLift] = 0;
+	motor[leftIntake] = 20;
+	motor[rightIntake] = 20;
 	setAllMotors(127);
 	wait1Msec(1500);
 	setAllMotors(50);
 	wait1Msec(200);
 	setAllMotors(0);
-	while(nMotorEncoder[leftLift]>-3000) {
+	while(nMotorEncoder[leftLift]>-3100) {
 		setAllLiftMotors(127);
 	}
 	setAllLiftMotors(0);
 	setAllMotors(20);
-	wait1Msec(1200);
+	wait1Msec(700);
 	setAllMotors(0);
-	motor[leftIntake] = -60;
-	motor[rightIntake] = -60;
-	wait1Msec(1500);
+	motor[leftIntake] = -30;
+	motor[rightIntake] = -30;
+	wait1Msec(3500);
 	motor[leftIntake] = 0;
 	motor[rightIntake] = 0;
+	setAllMotors(-20);
+	wait1Msec(700);
+	setAllMotors(0);
+	while(nMotorEncoder[leftLift]<-200) {
+		setAllLiftMotors(-100);
+	}
+	setAllLiftMotors(0);
+	setAllLeftMotors(-50);
+	setAllRightMotors(50);
+	wait1Msec(1160);
+	servo[leftHook]=155;
+	servo[rightHook]=65;
+	setAllMotors(-30);
+	wait1Msec(1200);
+	servo[leftHook]=50;
+	servo[rightHook]=173;
+	setAllMotors(50);
+	wait1Msec(2200);
+	playSound(soundBlip);
+	setAllMotors(10);
+	wait1Msec(30000);
 
 	//driveOffRamp();
 	/*

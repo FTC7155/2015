@@ -194,8 +194,8 @@ task main() { //Main task for code
 			motor[leftLift]=-127;
 			motor[rightLift]=127;
 			} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
-			motor[leftLift]=127;
-			motor[rightLift]=-127;
+			motor[leftLift]=100;
+			motor[rightLift]=-100;
 			} else {
 			motor[leftLift] = 0;
 			motor[rightLift] = 0;
