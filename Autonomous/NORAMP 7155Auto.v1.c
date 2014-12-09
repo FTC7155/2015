@@ -313,7 +313,7 @@ task main() {
 	setAllMotors(0);
 	motor[leftIntake] = -30;
 	motor[rightIntake] = -30;
-	wait1Msec(6000);
+	wait1Msec(3500);
 	motor[leftIntake] = 0;
 	motor[rightIntake] = 0;
 	setAllMotors(-20);
@@ -323,27 +323,10 @@ task main() {
 		setAllLiftMotors(-100);
 	}
 	setAllLiftMotors(0);
-	bool okay = false; bool rightGood = false; bool leftGood = false;
-	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-	while(!okay) {
-		if(nMotorEncoder[leftWheel1] <1600)
-			setAllLeftMotors(-50);
-		else {
-			setAllLeftMotors(0);
-			rightGood = true;
-		}
-
-		if(nMotorEncoder[rightWheel1] <750)
-			setAllRightMotors(50);
-		else {
-			setAllRightMotors(0);
-			leftGood = true;
-		}
-		if(leftGood && rightGood)
-			okay = true;
-	}
-	wait1Msec(1100);
+	/*
+	setAllLeftMotors(-50);
+	setAllRightMotors(50);
+	wait1Msec(975);
 	servo[leftHook]=155;
 	servo[rightHook]=65;
 	setAllMotors(-30);
@@ -355,8 +338,9 @@ task main() {
 	setAllRightMotors(50);
 	wait1Msec(200);
 	setAllMotors(50);
-	wait1Msec(2500);
+	wait1Msec(2200);
 	setAllMotors(10);
+	*/
 	wait1Msec(30000);
 
 	//driveOffRamp();

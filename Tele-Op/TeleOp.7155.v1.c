@@ -132,8 +132,8 @@ task intake () {
 		getJoystickSettings(joystick);
 		//Control for Intake
 		if(joy1Btn(Btn6) && !liftCondition){
-			motor[leftIntake] = 50;
-			motor[rightIntake] = 50;
+			motor[leftIntake] = 75;
+			motor[rightIntake] = 75;
 			liftCondition = true;
 			wait1Msec(300);
 			} else if(joy1Btn(Btn8) && !liftCondition) {
@@ -201,7 +201,7 @@ task main() { //Main task for code
 		motor[rightWheel1] = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
 
-		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3150){
+		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3200){
 			motor[leftLift]=-127;
 			motor[rightLift]=127;
 			} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
