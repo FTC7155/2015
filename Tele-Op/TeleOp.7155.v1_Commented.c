@@ -92,7 +92,7 @@ task intake () {
 			motor[rightIntake] = 127;								//Set the right intake motor to full power, to rake in balls
 			intakeOn = true;										//Tell the program that the intake is on
 			wait1Msec(300);											//Wait so that the program doesn't get stuck, and to give time for the intake to rake in balls
-		} 
+		}
 
 		//Spit Out Balls
 		else if(joy1Btn(Btn8) && !intakeOn) {						//If the intake out button is pressed, and the intake is off
@@ -100,7 +100,7 @@ task intake () {
 			motor[rightIntake] = -50;								//Set the right intake motor to half power, to accuratley spit out balls without having them fall out
 			intakeOn = true;										//Tell the program that the intake is on
 			wait1Msec(300);											//Wait so that the program doesn't get stuck, and to give time for the intake to rake in balls
-		} 
+		}
 
 		//Stop Intake Movement
 		else if (intakeOn && (joy1Btn(Btn8) || joy1Btn(Btn6))) {	//If any intake button is pressed, and the intake is on
@@ -148,16 +148,16 @@ task main() {
 		motor[rightWheel2] = joystick.joy1_y2;	//Set Front Right Wheel Speeds to Joystick Positions
 
 		//Controls Upward Motion of Lift
-		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3700){				//If the up button is pressed, and the lift is within the safe use limits
+		if(joy1Btn(Btn5)){				//If the up button is pressed, and the lift is within the safe use limits
 			motor[leftLift]=-127;										//Set the Left Lift Motors to Full Power, Upwards
 			motor[rightLift]=127;										//Set the Right Lift Motors to Full Power, Upwards
-		} 
+		}
 
 		//Controls Downward Motion of Lift
 		else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){			//If the down button is pressed, and the lift is within the safe use limits
 			motor[leftLift]=100;										//Set the Left Lift Motors to ~75% Power, Downwards
 			motor[rightLift]=-100;										//Set the Right Lift Motors to ~75% Power, Downwards
-		} 
+		}
 
 		//Makes Sure that the Lift Stops Moving when No Buttons are Pressed
 		else {															//If no lift buttons are pressed
