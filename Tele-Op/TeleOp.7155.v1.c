@@ -163,8 +163,8 @@ task intake () {
 		getJoystickSettings(joystick);
 		//Control for Intake
 		if(joy1Btn(Btn6) && !liftCondition){
-			motor[leftIntake] = 50;
-			motor[rightIntake] = 50;
+			motor[leftIntake] = 75;
+			motor[rightIntake] = 75;
 			liftCondition = true;
 			wait1Msec(300);
 			} else if(joy1Btn(Btn8) && !liftCondition) {
@@ -189,6 +189,76 @@ task init () {
 	}
 }
 
+task imposs () {
+	//        100 = Tempo
+  //          6 = Default octave
+  //    Quarter = Default note length
+  //        10% = Break between notes
+  //
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
+  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
+  PlayTone(  988,    7); wait1Msec(  75);  // Note(E, Duration(32th))
+  PlayTone( 1047,    7); wait1Msec(  75);  // Note(F, Duration(32th))
+  PlayTone( 1109,    7); wait1Msec(  75);  // Note(F#, Duration(32th))
+  PlayTone( 1175,    7); wait1Msec(  75);  // Note(G, Duration(32th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1047,   14); wait1Msec( 150);  // Note(F, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1109,   14); wait1Msec( 150);  // Note(F#, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
+  PlayTone( 1047,   14); wait1Msec( 150);  // Note(F, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1109,   14); wait1Msec( 150);  // Note(F#, Duration(16th))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(  880,  108); wait1Msec(1200);  // Note(D, Duration(Half))
+  PlayTone(    0,    7); wait1Msec(  75);  // Note(Rest, Duration(32th))
+  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(  831,  108); wait1Msec(1200);  // Note(C#, Duration(Half))
+  PlayTone(    0,    7); wait1Msec(  75);  // Note(Rest, Duration(32th))
+  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
+  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
+  PlayTone(  784,  108); wait1Msec(1200);  // Note(C, Duration(Half))
+  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
+  PlayTone(  932,   14); wait1Msec( 150);  // Note(A#5, Duration(16th))
+  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
+  StopTask(imposs);
+}
+
 task main() { //Main task for code
 
 	//Initialize Motors
@@ -207,8 +277,9 @@ task main() { //Main task for code
 
 	waitForStart();
 
-	//StopTask(init);
+	playSound(soundFastUpwardTones);
 
+	//StopTask(init);
 
 	nMotorEncoder[leftLift] = 0;
 	nMotorEncoder[rightLift] = 0;
@@ -227,8 +298,18 @@ task main() { //Main task for code
 		//Get joytick settings and positions
 		getJoystickSettings(joystick);
 
-		if(joy1Btn(Btn10))
+		if(joy1Btn(Btn4))
+		startTask(imposs);
+
+		if(joy1Btn(Btn10)) {
 			limits = false;
+			playTone(1000, 10);
+		}
+		if(joy1Btn(Btn9)) {
+			nMotorEncoder[leftLift] = 0;
+			limits = true;
+			playTone(1500, 10);
+		}
 
 		//Set left wheels
 		motor[leftWheel1] = joystick.joy1_y1;
@@ -241,26 +322,25 @@ task main() { //Main task for code
 			if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3150){
 				motor[leftLift]=-127;
 				motor[rightLift]=127;
-				} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
+			} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
 				motor[leftLift]=100;
 				motor[rightLift]=-100;
-				} else {
-				motor[leftLift] = 0;
-				motor[rightLift] = 0;
-				}
 			} else {
-				if(joy1Btn(Btn5)) {
-				motor[leftLift]=-127;
-				motor[rightLift]=127;
-				} else if(joy1Btn(Btn7)){
-				motor[leftLift]=100;
-				motor[rightLift]=-100;
-				} else {
 				motor[leftLift] = 0;
 				motor[rightLift] = 0;
 			}
-			displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
-
+		} else {
+			if(joy1Btn(Btn5)) {
+				motor[leftLift]=-127;
+				motor[rightLift]=127;
+			} else if(joy1Btn(Btn7)){
+				motor[leftLift]=100;
+				motor[rightLift]=-100;
+			} else {
+				motor[leftLift] = 0;
+				motor[rightLift] = 0;
+			}
 		}
+		displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
 	}
 }

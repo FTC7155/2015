@@ -287,76 +287,6 @@ void recursionPlayback () {
 	}
 }
 
-void imposs () {
-	//        100 = Tempo
-  //          6 = Default octave
-  //    Quarter = Default note length
-  //        10% = Break between notes
-  //
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  880,    7); wait1Msec(  75);  // Note(D, Duration(32th))
-  PlayTone(  933,    7); wait1Msec(  75);  // Note(D#, Duration(32th))
-  PlayTone(  988,    7); wait1Msec(  75);  // Note(E, Duration(32th))
-  PlayTone( 1047,    7); wait1Msec(  75);  // Note(F, Duration(32th))
-  PlayTone( 1109,    7); wait1Msec(  75);  // Note(F#, Duration(32th))
-  PlayTone( 1175,    7); wait1Msec(  75);  // Note(G, Duration(32th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1047,   14); wait1Msec( 150);  // Note(F, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1109,   14); wait1Msec( 150);  // Note(F#, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(    0,   27); wait1Msec( 300);  // Note(Rest, Duration(Eighth))
-  PlayTone( 1047,   14); wait1Msec( 150);  // Note(F, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1109,   14); wait1Msec( 150);  // Note(F#, Duration(16th))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(  880,  108); wait1Msec(1200);  // Note(D, Duration(Half))
-  PlayTone(    0,    7); wait1Msec(  75);  // Note(Rest, Duration(32th))
-  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(  831,  108); wait1Msec(1200);  // Note(C#, Duration(Half))
-  PlayTone(    0,    7); wait1Msec(  75);  // Note(Rest, Duration(32th))
-  PlayTone( 1398,   14); wait1Msec( 150);  // Note(A#, Duration(16th))
-  PlayTone( 1175,   14); wait1Msec( 150);  // Note(G, Duration(16th))
-  PlayTone(  784,  108); wait1Msec(1200);  // Note(C, Duration(Half))
-  PlayTone(    0,   14); wait1Msec( 150);  // Note(Rest, Duration(16th))
-  PlayTone(  932,   14); wait1Msec( 150);  // Note(A#5, Duration(16th))
-  PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
-  return;
-}
-
 task main() {
 	nMotorEncoder[leftLift] = 0;
 	nMotorEncoder[rightLift] = 0;
@@ -383,7 +313,7 @@ task main() {
 	setAllMotors(0);
 	motor[leftIntake] = -30;
 	motor[rightIntake] = -30;
-	wait1Msec(6000);
+	wait1Msec(3500);
 	motor[leftIntake] = 0;
 	motor[rightIntake] = 0;
 	setAllMotors(-20);
@@ -393,27 +323,10 @@ task main() {
 		setAllLiftMotors(-100);
 	}
 	setAllLiftMotors(0);
-	bool okay = false; bool rightGood = false; bool leftGood = false;
-	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-	while(!okay) {
-		if(nMotorEncoder[leftWheel1] <1600)
-			setAllLeftMotors(-50);
-		else {
-			setAllLeftMotors(0);
-			rightGood = true;
-		}
-
-		if(nMotorEncoder[rightWheel1] <750)
-			setAllRightMotors(50);
-		else {
-			setAllRightMotors(0);
-			leftGood = true;
-		}
-		if(leftGood && rightGood)
-			okay = true;
-	}
-	wait1Msec(1100);
+	/*
+	setAllLeftMotors(-50);
+	setAllRightMotors(50);
+	wait1Msec(975);
 	servo[leftHook]=155;
 	servo[rightHook]=65;
 	setAllMotors(-30);
@@ -425,8 +338,9 @@ task main() {
 	setAllRightMotors(50);
 	wait1Msec(200);
 	setAllMotors(50);
-	wait1Msec(2500);
+	wait1Msec(2200);
 	setAllMotors(10);
+	*/
 	wait1Msec(30000);
 
 	//driveOffRamp();
