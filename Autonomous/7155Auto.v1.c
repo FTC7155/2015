@@ -4,8 +4,8 @@
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Motor,  motorA,          rightIntake,   tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftIntake,    tmotorNXT, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S2_C1_1,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C1_2,     rightLift,     tmotorTetrix, PIDControl, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C2_1,     leftWheel2,    tmotorTetrix, openLoop, reversed)
@@ -157,18 +157,23 @@ void setAllLiftMotorEncoderTargets (int value) {
 //#Needs Calibration#//
 void turn(int degrees) {
 	float distance = degrees/2*PI;
+	nMotorEncoder[leftWheel1] = 0;
+	nMotorEncoder[rightWheel1] = 0;
 	if(degrees>0){
-		nMotorEncoderTarget[leftWheel1] += distance;
-		nMotorEncoderTarget[rightWheel1] -= distance;
-		setAllLeftMotors(75);
-		setAllRightMotors(-75);
-		} else {
-		nMotorEncoderTarget[leftWheel1] -= distance;
-		nMotorEncoderTarget[rightWheel1] += distance;
-		setAllLeftMotors(-75);
-		setAllRightMotors(75);
+		while(nMotorEncoder[leftWheel1] < distance){
+			setAllLeftMotors(30);
+			setAllRightMotors(-30);
+			displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
+			displayCenteredBigTextLine(4, "%d", distance);
+		}
+	} else {
+		while(nMotorEncoder[leftWheel1] > distance) {
+			setAllLeftMotors(15);
+			setAllRightMotors(15);
+			displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
+			displayCenteredBigTextLine(4, "%d", distance);
+		}
 	}
-	while(nMotorRunState[leftWheel1]!=runStateIdle) {}
 	setAllMotors(0);
 }
 
@@ -356,7 +361,10 @@ void imposs () {
   PlayTone(  784,   14); wait1Msec( 150);  // Note(C, Duration(16th))
   return;
 }
+task main() {
+	turn(90);
 
+/*
 task main() {
 	nMotorEncoder[leftLift] = 0;
 	nMotorEncoder[rightLift] = 0;
