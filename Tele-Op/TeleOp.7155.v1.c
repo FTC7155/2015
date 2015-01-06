@@ -45,9 +45,6 @@ task hook () {
 	//Loop this part of the code forever
 	while(true) {
 
-		//Update the Joysticks
-		getJoystickSettings(joystick);
-
 		//Put hook up
 		if(joy1Btn(Btn2)&&!hookUp) { 	//If the A Button is pressed, and the hook isn't up
 			servo[leftHook]=155;				//Set left hook to up position
@@ -75,9 +72,6 @@ task tip () {
 
 	//Loop this part of the code forever
 	while(true) {
-
-		//Update the Joysticks
-		getJoystickSettings(joystick);
 
 		//Put hook up
 		if(joy1Btn(Btn3)&&!tipUp) { 	//If the A Button is pressed, and the hook isn't up
