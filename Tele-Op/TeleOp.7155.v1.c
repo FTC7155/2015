@@ -42,25 +42,26 @@ task hook () {
 	//Boolean statement to determine if the hook is up. Initilization.
 	bool hookUp = false;
 
+	bool held = false;
+	bool button = false;
+
 	//Loop this part of the code forever
 	while(true) {
-
-		//Put hook up
-		if(joy1Btn(Btn2)&&!hookUp) { 	//If the A Button is pressed, and the hook isn't up
-			servo[leftHook]=155;				//Set left hook to up position
-			servo[rightHook]=65;				//Set right hook to up position
-			hookUp=true;								//Tell the program that the hook is up
-			wait1Msec(300);							//Wait so that we can give the hook time to go up, and so the button doesn't get "stuck"
+		if(joy1Btn(Btn2))
+			button = true;
+		if(button && button != held) {
+			if(!hookUp) {
+				servo[leftHook]=155;				//Set left hook to up position
+				servo[rightHook]=65;				//Set right hook to up position
+				} else {
+				servo[leftHook]=50;
+				servo[rightHook]=173;
+			}
 		}
-
-		//Put hook down
-		if(joy1Btn(Btn2)&&hookUp) {
-			servo[leftHook]=50;
-			servo[rightHook]=173;
-			hookUp=false;
-			//while(joy1Btn(Btn2)) {}
-			wait1Msec(300);
-		}
+		held = button;
+		if(!button) held = false;
+		wait1Msec(25); //To keep the code running quickly
+		displayCenteredBigTextLine(1, "%d", button);
 	}
 }
 
@@ -89,6 +90,7 @@ task tip () {
 			//while(joy1Btn(Btn2)) {}
 			wait1Msec(300);
 		}
+		wait1Msec(25);
 	}
 }
 
@@ -114,6 +116,7 @@ task intake () {
 			liftCondition = false;
 			wait1Msec(300);
 		}
+		wait1Msec(25);
 	}
 }
 
@@ -193,7 +196,7 @@ void wheels () {
 		//Set left wheels
 		motor[leftWheel1] = joystick.joy1_y1;
 		motor[leftWheel2] = joystick.joy1_y1;
-	} else {
+		} else {
 		motor[leftWheel1] = 0;
 		motor[leftWheel2] = 0;
 	}
@@ -202,7 +205,7 @@ void wheels () {
 		//Set left wheels
 		motor[rightWheel1] = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
-	} else {
+		} else {
 		motor[rightWheel1] = 0;
 		motor[rightWheel2] = 0;
 	}
@@ -243,7 +246,7 @@ bool lift (bool limits) {
 			motor[rightLift] = 0;
 		}
 	}
-	displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
+	//displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
 
 	return limits;
 }
@@ -277,5 +280,6 @@ task main() { //Main task for code
 		wheels();
 		limits = lift(limits);
 
+		wait1Msec(25);
 	}
 }
