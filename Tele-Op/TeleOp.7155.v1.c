@@ -99,7 +99,7 @@ task intake () {
 
 	while(true) {
 		//Control for Intake
-		if(joy1Btn(Btn6) && !liftCondition){
+		if(joy1Btn(Btn7) && !liftCondition){
 			motor[leftIntake] = 75;
 			motor[rightIntake] = 75;
 			liftCondition = true;
@@ -109,7 +109,7 @@ task intake () {
 			motor[rightIntake] = -50;
 			liftCondition = true;
 			wait1Msec(300);
-			} else if (liftCondition && (joy1Btn(Btn8) || joy1Btn(Btn6))){
+			} else if (liftCondition && (joy1Btn(Btn8) || joy1Btn(Btn7))){
 			motor[leftIntake] = 0;
 			motor[rightIntake] = 0;
 			liftCondition = false;
@@ -225,7 +225,7 @@ bool lift (bool limits) {
 		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3150){
 			motor[leftLift]=-127;
 			motor[rightLift]=127;
-			} else if(joy1Btn(Btn7) && nMotorEncoder[leftLift]<-10){
+			} else if(joy1Btn(Btn6) && nMotorEncoder[leftLift]<-10){
 			motor[leftLift]=100;
 			motor[rightLift]=-100;
 			} else {
@@ -236,7 +236,7 @@ bool lift (bool limits) {
 		if(joy1Btn(Btn5)) {
 			motor[leftLift]=-127;
 			motor[rightLift]=127;
-			} else if(joy1Btn(Btn7)){
+			} else if(joy1Btn(Btn6)){
 			motor[leftLift]=100;
 			motor[rightLift]=-100;
 			} else {
