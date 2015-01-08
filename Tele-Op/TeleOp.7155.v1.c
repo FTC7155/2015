@@ -4,6 +4,7 @@
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Motor,  motorA,          rightIntake,   tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftIntake,    tmotorNXT, PIDControl, encoder)
+#pragma config(Motor,  motorC,          winch,         tmotorNXT, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C2_1,     leftWheel1,    tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_2,     rightWheel1,   tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S2_C1_1,     leftLift,      tmotorTetrix, PIDControl, reversed, encoder)
