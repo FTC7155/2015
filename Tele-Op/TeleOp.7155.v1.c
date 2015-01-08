@@ -43,29 +43,27 @@ task hook () {
 	//Boolean statement to determine if the hook is up. Initilization.
 	bool hookUp = false;
 
-	bool held = false;
-	bool button = false;
-
 	//Loop this part of the code forever
 	while(true) {
-		if(joy1Btn(Btn2))
-			button = true;
-		if(button && button != held) {
-			if(!hookUp) {
-				servo[leftHook]=155;				//Set left hook to up position
-				servo[rightHook]=65;				//Set right hook to up position
-				} else {
-				servo[leftHook]=50;
-				servo[rightHook]=173;
-			}
+
+		//Put hook up
+		if(joy1Btn(Btn2)&&!hookUp) { 	//If the A Button is pressed, and the hook isn't up
+			servo[leftHook]=155;				//Set left hook to up position
+			servo[rightHook]=65;				//Set right hook to up position
+			hookUp=true;								//Tell the program that the hook is up
+			wait1Msec(300);							//Wait so that we can give the hook time to go up, and so the button doesn't get "stuck"
 		}
-		held = button;
-		if(!button) held = false;
-		wait1Msec(25); //To keep the code running quickly
-		displayCenteredBigTextLine(1, "%d", button);
+
+		//Put hook down
+		if(joy1Btn(Btn2)&&hookUp) {
+			servo[leftHook]=50;
+			servo[rightHook]=173;
+			hookUp=false;
+			//while(joy1Btn(Btn2)) {}
+			wait1Msec(300);
+		}
 	}
 }
-
 //Task to control all the movement of the hook for the robot during tele-op
 task tip () {
 
@@ -192,11 +190,7 @@ task imposs () {
 }
 
 void wheels () {
-	//Set left wheels
-	motor[leftWheel1] = joystick.joy1_y1;
-	motor[leftWheel2] = joystick.joy1_y1;
 
-<<<<<<< HEAD
 	if(abs(joystick.joy1_y1)>10) {
 		//Set left wheels
 		motor[leftWheel1] = joystick.joy1_y1;
@@ -206,20 +200,14 @@ void wheels () {
 		motor[leftWheel2] = 0;
 	}
 
-	if(abs(joystick.joy1_y1)>10) {
-		//Set left wheels
+	if(abs(joystick.joy1_y2)>10) {
+		//Set right wheels
 		motor[rightWheel1] = joystick.joy1_y2;
 		motor[rightWheel2] = joystick.joy1_y2;
 		} else {
 		motor[rightWheel1] = 0;
 		motor[rightWheel2] = 0;
 	}
-=======
-	//Set right wheels
-	motor[rightWheel1] = joystick.joy1_y2;
-	motor[rightWheel2] = joystick.joy1_y2;
->>>>>>> parent of 622d3d8... Teleop cleanup and add thresholds
-
 }
 
 bool lift (bool limits) {
