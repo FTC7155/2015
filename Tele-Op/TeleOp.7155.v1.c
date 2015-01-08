@@ -190,7 +190,6 @@ task imposs () {
 }
 
 void wheels () {
-
 	if(abs(joystick.joy1_y1)>10) {
 		//Set left wheels
 		motor[leftWheel1] = joystick.joy1_y1;
@@ -267,7 +266,6 @@ task main() { //Main task for code
 
 	startTask(intake);
 	startTask(hook);
-	startTask(tip);
 
 	while(true) {
 
