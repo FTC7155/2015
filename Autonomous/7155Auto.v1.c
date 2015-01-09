@@ -159,6 +159,7 @@ void turn(int degrees) {
 	bool okay = false, rightGood = false, leftGood = false;
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
+	if(degrees>0){
 	int leftTarget = 22.42*degrees;
 	int rightTarget = 4.9959*degrees;
 	while(!okay) {
@@ -178,6 +179,27 @@ void turn(int degrees) {
 		if(leftGood && rightGood)
 			okay = true;
 	}
+} else {
+	int leftTarget = -22.42*degrees;
+	int rightTarget = -4.9959*degrees;
+	while(!okay) {
+		if(nMotorEncoder[leftWheel1] >leftTarget)
+			setAllLeftMotors(25);
+		else {
+			setAllLeftMotors(0);
+			leftGood = true;
+		}
+
+		if(nMotorEncoder[rightWheel1] >rightTarget)
+			setAllRightMotors(-25);
+		else {
+			setAllRightMotors(0);
+			rightGood = true;
+		}
+		if(leftGood && rightGood)
+			okay = true;
+	}
+}
 }
 
 void lift (int position) {
@@ -365,10 +387,7 @@ void imposs () {
   return;
 }
 task main() {
-	turn(90);
-
-/*
-task main() {
+	waitForStart();
 	nMotorEncoder[leftLift] = 0;
 	nMotorEncoder[rightLift] = 0;
 	waitForStart();
@@ -389,8 +408,8 @@ task main() {
 		setAllLiftMotors(127);
 	}
 	setAllLiftMotors(0);
-	setAllMotors(20);
-	wait1Msec(700);
+	setAllMotors(10);
+	wait1Msec(900);
 	setAllMotors(0);
 	motor[leftIntake] = -30;
 	motor[rightIntake] = -30;
@@ -407,7 +426,6 @@ task main() {
 	bool okay = false; bool rightGood = false; bool leftGood = false;
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
-	/*
 		while(!okay) {
 		if(nMotorEncoder[leftWheel1] <1600)
 			setAllLeftMotors(-50);
@@ -425,19 +443,17 @@ task main() {
 		if(leftGood && rightGood)
 			okay = true;
 	}
-	*/
-	turn(180);
 	wait1Msec(1100);
 	servo[leftHook]=155;
 	servo[rightHook]=65;
 	setAllMotors(-30);
-	wait1Msec(1200);
+	wait1Msec(1000);
 	setAllMotors(0);
 	servo[leftHook]=50;
 	servo[rightHook]=173;
 	//setAllLeftMotors(-50);
 	//setAllRightMotors(50);
-	turn(45);
+	turn(-95);
 	wait1Msec(200);
 	setAllMotors(50);
 	wait1Msec(2500);
@@ -445,7 +461,7 @@ task main() {
 	//driveOffRamp();
 	/*
 	bSystemLeaveServosEnabledOnProgramStop=true;
-	if(startOnRamp)
+r	if(startOnRamp)
 	driveOffRamp();
 	if(knockDownCascade) {
 	startTask(recursionRecorder);
@@ -459,5 +475,4 @@ task main() {
 	moveGoalToZone();
 	unhookGoal();
 	}
-	*/
-}
+	*/}
