@@ -156,25 +156,28 @@ void setAllLiftMotorEncoderTargets (int value) {
 //Used to turn a number of degrees
 //#Needs Calibration#//
 void turn(int degrees) {
-	float distance = degrees/2*PI;
+	bool okay = false, rightGood = false, leftGood = false;
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
-	if(degrees>0){
-		while(nMotorEncoder[leftWheel1] < distance){
-			setAllLeftMotors(30);
-			setAllRightMotors(-30);
-			displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
-			displayCenteredBigTextLine(4, "%d", distance);
+	int leftTarget = 22.42*degrees;
+	int rightTarget = 4.9959*degrees;
+	while(!okay) {
+		if(nMotorEncoder[leftWheel1] <leftTarget)
+			setAllLeftMotors(-25);
+		else {
+			setAllLeftMotors(0);
+			leftGood = true;
 		}
-	} else {
-		while(nMotorEncoder[leftWheel1] > distance) {
-			setAllLeftMotors(15);
-			setAllRightMotors(15);
-			displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
-			displayCenteredBigTextLine(4, "%d", distance);
+
+		if(nMotorEncoder[rightWheel1] <rightTarget)
+			setAllRightMotors(25);
+		else {
+			setAllRightMotors(0);
+			rightGood = true;
 		}
+		if(leftGood && rightGood)
+			okay = true;
 	}
-	setAllMotors(0);
 }
 
 void lift (int position) {
@@ -404,7 +407,8 @@ task main() {
 	bool okay = false; bool rightGood = false; bool leftGood = false;
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
-	while(!okay) {
+	/*
+		while(!okay) {
 		if(nMotorEncoder[leftWheel1] <1600)
 			setAllLeftMotors(-50);
 		else {
@@ -421,6 +425,8 @@ task main() {
 		if(leftGood && rightGood)
 			okay = true;
 	}
+	*/
+	turn(180);
 	wait1Msec(1100);
 	servo[leftHook]=155;
 	servo[rightHook]=65;
@@ -429,13 +435,12 @@ task main() {
 	setAllMotors(0);
 	servo[leftHook]=50;
 	servo[rightHook]=173;
-	setAllLeftMotors(-50);
-	setAllRightMotors(50);
+	//setAllLeftMotors(-50);
+	//setAllRightMotors(50);
+	turn(45);
 	wait1Msec(200);
 	setAllMotors(50);
 	wait1Msec(2500);
-	setAllMotors(10);
-	wait1Msec(30000);
 
 	//driveOffRamp();
 	/*
