@@ -400,26 +400,30 @@ task main() {
 	motor[leftIntake] = 20;
 	motor[rightIntake] = 20;
 	setAllMotors(127);
-	wait1Msec(1600);
+	wait1Msec(1550);
+	setAllRightMotors(50);
+	wait1Msec(25);
 	setAllMotors(50);
 	wait1Msec(200);
 	setAllMotors(0);
-	while(nMotorEncoder[leftLift]>-3100) {
+	while(nMotorEncoder[leftLift]>-3000) {
 		setAllLiftMotors(127);
 	}
 	setAllLiftMotors(0);
+	setAllRightMotors(10);
+	wait1Msec(50);
 	setAllMotors(10);
 	wait1Msec(900);
 	setAllMotors(0);
 	motor[leftIntake] = -30;
 	motor[rightIntake] = -30;
-	wait1Msec(6000);
+	wait1Msec(3000);
 	motor[leftIntake] = 0;
 	motor[rightIntake] = 0;
-	setAllMotors(-20);
-	wait1Msec(700);
+	setAllMotors(-10);
+	wait1Msec(900);
 	setAllMotors(0);
-	while(nMotorEncoder[leftLift]<-200) {
+	while(nMotorEncoder[leftLift]<-400) {
 		setAllLiftMotors(-100);
 	}
 	setAllLiftMotors(0);
@@ -446,18 +450,26 @@ task main() {
 	wait1Msec(1100);
 	servo[leftHook]=155;
 	servo[rightHook]=65;
-	setAllMotors(-30);
-	wait1Msec(1000);
+	setAllMotors(-20);
+	wait1Msec(1100);
 	setAllMotors(0);
+	wait1Msec(200);
 	servo[leftHook]=50;
 	servo[rightHook]=173;
 	//setAllLeftMotors(-50);
 	//setAllRightMotors(50);
-	turn(-95);
+	nMotorEncoder[leftWheel1] = 0;
+	nMotorEncoder[rightWheel1] = 0;
+	wait1Msec(200);
+	setAllLeftMotors(50);
+	setAllRightMotors(-50);
+	wait1Msec(350);
+	setAllMotors(0);
 	wait1Msec(200);
 	setAllMotors(50);
 	wait1Msec(2500);
-
+	setAllMotors(0);
+	imposs();
 	//driveOffRamp();
 	/*
 	bSystemLeaveServosEnabledOnProgramStop=true;
