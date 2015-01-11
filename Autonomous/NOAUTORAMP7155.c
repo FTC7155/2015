@@ -387,104 +387,12 @@ void imposs () {
   return;
 }
 task main() {
+	playSound(soundFastUpwardTones);
 	waitForStart();
-	nMotorEncoder[leftLift] = 0;
-	nMotorEncoder[rightLift] = 0;
-	waitForStart();
-	while(nMotorEncoder[leftLift]>-300) {
-		motor[leftLift]=-127;
-		motor[rightLift]=127;
-	}
-	motor[leftLift] = 0;
-	motor[rightLift] = 0;
-	motor[leftIntake] = 20;
-	motor[rightIntake] = 20;
-	setAllRightMotors(20);
-	wait1Msec(10);
-	setAllMotors(127);
-	wait1Msec(1550);
-	setAllRightMotors(50);
-	wait1Msec(25);
-	setAllMotors(50);
-	wait1Msec(200);
+	setAllMotors(80);
+	wait1Msec(2500);
 	setAllMotors(0);
-	wait1Msec(10);
-	setAllMotors(-10);
-	int backdist = 20;
-	wait1Msec(backdist);
-	setAllMotors(0);
-	while(nMotorEncoder[leftLift]>-3200) {
-		setAllLiftMotors(127);
-	}
-
-	setAllMotors(10);
-	wait1Msec(backdist);
-	setAllMotors(0);
-	setAllLiftMotors(0);
-	setAllRightMotors(10);
-	wait1Msec(50);
-	setAllMotors(10);
-	wait1Msec(900);
-	setAllMotors(0);
-	motor[leftIntake] = -30;
-	motor[rightIntake] = -30;
-	wait1Msec(3000);
-	motor[leftIntake] = 0;
-	motor[rightIntake] = 0;
-	setAllMotors(-10);
-	wait1Msec(900);
-	setAllMotors(0);
-	while(nMotorEncoder[leftLift]<-400) {
-		setAllLiftMotors(-100);
-	}
-	//setAllRightMotors(127);
-	//wait1Msec(500);
-	setAllLiftMotors(0);
-	bool okay = false; bool rightGood = false; bool leftGood = false;
-	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-		while(!okay) {
-		if(nMotorEncoder[leftWheel1] <1600)
-			setAllLeftMotors(-50);
-		else {
-			setAllLeftMotors(0);
-			rightGood = true;
-		}
-
-		if(nMotorEncoder[rightWheel1] <750)
-			setAllRightMotors(50);
-		else {
-			setAllRightMotors(0);
-			leftGood = true;
-		}
-		if(leftGood && rightGood)
-			okay = true;
-	}
-		wait1Msec(1100);
-	servo[leftHook]=155;
-	servo[rightHook]=65;
-	setAllMotors(-20);
-	wait1Msec(1100);
-	setAllMotors(0);
-	wait1Msec(200);
-	servo[leftHook]=50;
-	servo[rightHook]=173;
-	//setAllLeftMotors(-50);
-	//setAllRightMotors(50);
-	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-	wait1Msec(200);
-	setAllLeftMotors(50);
-	setAllRightMotors(-50);
-	wait1Msec(290);
-	setAllMotors(0);
-	wait1Msec(200);
-	setAllMotors(50);
-	wait1Msec(1000);
-	setAllMotors(20);
-	wait1Msec(1000);
-	setAllMotors(0);
-	imposs();
+	while(true) { imposs(); wait1Msec(2000); }
 	//driveOffRamp();
 	/*
 	bSystemLeaveServosEnabledOnProgramStop=true;
