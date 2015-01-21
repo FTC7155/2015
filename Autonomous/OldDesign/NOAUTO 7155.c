@@ -389,9 +389,16 @@ void imposs () {
 task main() {
 	playSound(soundFastUpwardTones);
 	waitForStart();
-	setAllMotors(80);
-	wait1Msec(2500);
-	setAllMotors(0);
+	setAllMotors(100);
+	wait1Msec(1000);
+
+	setAllMotors(30);
+	wait1Msec(300);
+	while(nMotorEncoder[leftLift]>-3200) {
+		setAllLiftMotors(127);
+	}
+	motor[leftIntake] = 100;
+	motor[rightIntake] = -100;
 	while(true) { imposs(); wait1Msec(2000); }
 	//driveOffRamp();
 	/*
