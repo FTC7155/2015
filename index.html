@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>2015 by FTC7155</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>2015</h1>
+        <p>Code for the 2014-2015 FTC Competition: Cascade Effect</p>
+
+        <p class="view"><a href="https://github.com/FTC7155/2015">View the Project on GitHub <small>FTC7155/2015</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/FTC7155/2015/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/FTC7155/2015/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/FTC7155/2015">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="ftc-team-7155-code" class="anchor" href="#ftc-team-7155-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>FTC Team 7155 Code</h1>
+
+<p>The code for Harvard-Westlake Middle School's First Tech Challenge Team 7155, The Quantum Potentials.</p>
+
+<h2>
+<a id="autonomous" class="anchor" href="#autonomous" aria-hidden="true"><span class="octicon octicon-link"></span></a>Autonomous</h2>
+
+<p>The Match starts with a 30-second Autonomous Period where Robots are operated via pre-programmed instructions only. </p>
+
+<p>Prior to the start of the Autonomous Period, the Center Structure will be rotated to one of three positions. 
+Points will be awarded for Robots achieving certain tasks including placing Autonomous Balls in the Rolling Goal and/or Center Goal , Robots moving off the Platform, knocking over the kickstand (and releasing balls into the field of play), and moving their Rolling Goals into the Alliance’s Parking Zone.</p>
+
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Driving from Platform On to Playing Field floor</td>
+<td>20 points</td>
+</tr>
+<tr>
+<td>Releasing the Kickstand to distribute Balls</td>
+<td>30 points</td>
+</tr>
+<tr>
+<td>Autonomous Ball In any Rolling Goal</td>
+<td>30 points/Goal</td>
+</tr>
+<tr>
+<td>Autonomous Ball In Center Goal</td>
+<td>60 points</td>
+</tr>
+<tr>
+<td>Moving Rolling Goal In Parking Zone</td>
+<td>20 points/Goal</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="tele-op" class="anchor" href="#tele-op" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tele-Op</h2>
+
+<p>The Tele-Op code has four separate tasks handling different parts of the robot.</p>
+
+<h3>
+<a id="hook-task" class="anchor" href="#hook-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hook Task</h3>
+
+<p>This task deals with toggling the two servo hooks that grab onto the base of the rolling goals in order to move them around. It has a loop that continuously checks if the toggle button (button 2) is pressed. If pressed, the program then checks if the hook is up, using a Boolean statement, and sets the servos to the appropriate position to grab the hook. </p>
+
+<h3>
+<a id="intake-task" class="anchor" href="#intake-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intake Task</h3>
+
+<p>This task deals with the two Lego motors that function as the intake for the robot. When the top bumper is pushed, the motors are powered, causing the intake to begin to rake in balls with its zip ties. Any bumper button will stop the intake. When the lift has been raised and the robot is ready to deposit balls, the driver can push the bottom button, which spins the motors slowly in the reverse direction to deposit them into the tubes.</p>
+
+<h3>
+<a id="main-task" class="anchor" href="#main-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main Task:</h3>
+
+<p>The Main task deals with several parts of the robot that do not need a separate task to control toggling. This task is broken up into two methods: Lift and Wheels.</p>
+
+<h3>
+<a id="lift" class="anchor" href="#lift" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lift</h3>
+
+<p>The Lift method controls the linear slide on the robot and allows the ball intake/holder to be raised and lowered in order to score in the various sized goals, and pick up balls from the playing field floor. The program first sets the encoders on the lift motors so that the motors will not keep spinning after the lift has been brought down. This prevents the lift’s winch mechanism from breaking during a match. Should the driver need to cancel these limits, he/she can simply press the Cancel Lift Limits button (button 10). This will remove all limits on the lift and give full manual operation to the driver. The driver presses the top bumper to raise the lift and the lower bumper to lower the lift.</p>
+
+<h3>
+<a id="wheels" class="anchor" href="#wheels" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wheels</h3>
+
+<p>The robot uses a tank drive to control the wheels. The driver uses the left and right knobs to control the left and right wheels respectively. Because the controllers are not always the most accurate, the robot will not take an input unless the controller input is greater than 10. This ensures that the robot does not jitter around on the playing field and helps us ensure that our motors will last longer.</p>
+
+<h2>
+<a id="main-website" class="anchor" href="#main-website" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main Website</h2>
+
+<p>Visit us at <a href="http://hwmsrobotics.org">http://hwmsrobotics.org</a> and check out our social media at <a href="http://hwmsrobotics.org/#social-media">http://hwmsrobotics.org/#social-media</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/FTC7155">FTC7155</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
