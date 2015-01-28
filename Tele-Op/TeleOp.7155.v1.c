@@ -183,46 +183,46 @@ void wheels () {
 		motor[rightWheel2] = 0;
 	}
 }
-/*
+
 bool lift (bool limits) {
 	if(joy1Btn(Btn10)) {
 		limits = false;
 		playTone(1000, 10);
 	}
 	if(joy1Btn(Btn9)) {
-		nMotorEncoder[leftLift] = 0;
+		nMotorEncoder[lift1] = 0;
 		limits = true;
 		playTone(1500, 10);
 	}
 
 	if(limits){
-		if(joy1Btn(Btn5)&& nMotorEncoder[leftLift]>-3150){
-			motor[leftLift]=-127;
-			motor[rightLift]=127;
-			} else if(joy1Btn(Btn6) && nMotorEncoder[leftLift]<-10){
-			motor[leftLift]=100;
-			motor[rightLift]=-100;
+		if(joy1Btn(Btn5)&& nMotorEncoder[lift1]>-3150){
+			motor[lift1] = 127;
+			motor[lift2] = 127;
+			} else if(joy1Btn(Btn6) && nMotorEncoder[lift1]<-10){
+			motor[lift1] = 100;
+			motor[lift2] = 100;
 			} else {
-			motor[leftLift] = 0;
-			motor[rightLift] = 0;
+			motor[lift1] = 0;
+			motor[lift2] = 0;
 		}
-		} else {
+	} else {
 		if(joy1Btn(Btn5)) {
-			motor[leftLift]=-127;
-			motor[rightLift]=127;
+			motor[lift1] = 127;
+			motor[lift2] = 127;
 			} else if(joy1Btn(Btn6)){
-			motor[leftLift]=100;
-			motor[rightLift]=-100;
+			motor[lift1] = 100;
+			motor[lift2] = 100;
 			} else {
-			motor[leftLift] = 0;
-			motor[rightLift] = 0;
+			motor[lift1] = 0;
+			motor[lift2] = 0;
 		}
 	}
-	//displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[leftLift], nMotorEncoder[rightLift]);
+	//displayCenteredBigTextLine(1, "%d, %d", nMotorEncoder[lift1], nMotorEncoder[lift2]);
 
 	return limits;
 }
-*/
+
 void fun () {
 	if(joy1Btn(Btn4))
 		startTask(imposs);
@@ -238,9 +238,6 @@ task main() { //Main task for code
 
 	playSound(soundFastUpwardTones);
 
-	//nMotorEncoder[leftLift] = 0;
-	//nMotorEncoder[rightLift] = 0;
-
 	startTask(intake);
 	startTask(hook);
 	startTask(badger);
@@ -252,7 +249,7 @@ task main() { //Main task for code
 
 		fun();
 		wheels();
-		//limits = lift(limits);
+		limits = lift(limits);
 
 		wait1Msec(25);
 	}
