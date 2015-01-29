@@ -4,8 +4,8 @@
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S2,     ,               sensorI2CMuxController)
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
-#pragma config(Motor,  mtr_S1_C1_1,     pretake,       tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C1_2,     intake,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_1,     intake,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C1_2,     pretake,       tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, PIDControl, encoder)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed, encoder)
@@ -186,7 +186,7 @@ bool lift (bool limits) {
 			motor[lift1] = 0;
 			motor[lift2] = 0;
 		}
-	} else {
+		} else {
 		if(joy1Btn(Btn5)) {
 			motor[lift1] = 127;
 			motor[lift2] = 127;
@@ -208,6 +208,16 @@ void fun () {
 		startTask(imposs);
 }
 
+void badger() {
+	if(joy1Btn(Btn8)) {
+		motor[intake] = 127;
+		} else if (joy1Btn(Btn7)) {
+		motor[intake] = -127;
+		} else {
+		motor[intake] = 0;
+	}
+}
+
 task main() { //Main task for code
 
 	bool limits = true;
@@ -221,13 +231,7 @@ task main() { //Main task for code
 	startTask(intake);
 	startTask(hook);
 
-	if(joy1Btn(Btn8)) {
-			motor[intake] = 127;
-		} else if (joy1Btn(Btn7)) {
-			motor[intake] = -127;
-		} else {
-			motor[intake] = 0;
-		}
+
 
 	while(true) {
 
@@ -237,6 +241,7 @@ task main() { //Main task for code
 		fun();
 		wheels();
 		limits = lift(limits);
+		badger();
 
 		wait1Msec(25);
 	}
