@@ -6,12 +6,12 @@
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     pretake,       tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     intake,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_1,     lif1,          tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C2_1,     rightWheel1,   tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S2_C2_2,     rightWheel2,   tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed, encoder)
+#pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S2_C2_1,     rightWheel1,   tmotorTetrix, openLoop, encoder)
+#pragma config(Motor,  mtr_S2_C2_2,     rightWheel2,   tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Servo,  srvo_S3_C1_1,    servo1,               tServoNone)
 #pragma config(Servo,  srvo_S3_C1_2,    servo2,               tServoNone)
 #pragma config(Servo,  srvo_S3_C1_3,    servo3,               tServoNone)
@@ -72,26 +72,6 @@ task hook () {
 			wait1Msec(300);
 		}
 	}
-}
-
-task badger () {
-	bool intakeOn = false;
-	while(true) {
-		if(joy1Btn(Btn4) && !intakeOn) {
-			intakeOn = true;
-		} else if(joy1Btn(Btn4) && intakeOn)
-			intakeOn = false;
-		}
-
-		if(nMotorRunState[intake] = runStateIdle) {
-			motor[intake] = -127
-		} else if(!intakeOn) {
-			motor[pretake] = 0;
-			motor[intake] = 0;
-		} else if(intakeOn) {
-			motor[pretake] = 127;
-			motor[intake] = 127;
-		}
 }
 
 task imposs () {
@@ -200,8 +180,8 @@ bool lift (bool limits) {
 			motor[lift1] = 127;
 			motor[lift2] = 127;
 			} else if(joy1Btn(Btn6) && nMotorEncoder[lift1]<-10){
-			motor[lift1] = 100;
-			motor[lift2] = 100;
+			motor[lift1] = -100;
+			motor[lift2] = -100;
 			} else {
 			motor[lift1] = 0;
 			motor[lift2] = 0;
@@ -211,8 +191,8 @@ bool lift (bool limits) {
 			motor[lift1] = 127;
 			motor[lift2] = 127;
 			} else if(joy1Btn(Btn6)){
-			motor[lift1] = 100;
-			motor[lift2] = 100;
+			motor[lift1] = -100;
+			motor[lift2] = -100;
 			} else {
 			motor[lift1] = 0;
 			motor[lift2] = 0;
@@ -240,7 +220,14 @@ task main() { //Main task for code
 
 	startTask(intake);
 	startTask(hook);
-	startTask(badger);
+
+	if(joy1Btn(Btn8)) {
+			motor[intake] = 127;
+		} else if (joy1Btn(Btn7)) {
+			motor[intake] = -127;
+		} else {
+			motor[intake] = 0;
+		}
 
 	while(true) {
 
