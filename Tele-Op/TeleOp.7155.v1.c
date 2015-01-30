@@ -208,13 +208,39 @@ void fun () {
 		startTask(imposs);
 }
 
-void badger() {
-	if(joy1Btn(Btn8)) {
-		motor[intake] = 127;
-		} else if (joy1Btn(Btn7)) {
-		motor[intake] = -127;
-		} else {
-		motor[intake] = 0;
+task badger {
+	bool badgerOn = false;
+	bool badgerIn = false;
+
+	//Loop this part of the code forever
+	while(true) {
+		if(joy1Btn(Btn8)&&!badgerOn) {
+			motor[intake] = 127;
+			badgerOn=true;
+			badgerIn = true;
+			wait1Msec(300);
+		} else if(joy1Btn(Btn7)&&!badgerOn) {
+			motor[intake] = -127;
+			badgerOn=true;
+			badgerIn = false;
+			wait1Msec(300);
+		} else if((joy1Btn(Btn7) || joy1Btn(Btn8)) && badgerOn) {
+			motor[intake] = 0;
+			badgerOn=false;
+			badgerIn=false;
+			wait1Msec(300);
+		}
+		if(nMotorRunState[intake] == runStateIdle&&badgerOn){
+			if(badgerIn){
+				motor[intake] = -30;
+				wait1Msec(200);
+				motor[intake] = 127;
+			} else {
+				motor[intake] = 30;
+				wait1Msec(200);
+				motor[intake] = -127;
+			}
+		}
 	}
 }
 
@@ -230,8 +256,7 @@ task main() { //Main task for code
 
 	startTask(intake);
 	startTask(hook);
-
-
+	startTask(badger);
 
 	while(true) {
 
@@ -241,7 +266,6 @@ task main() { //Main task for code
 		fun();
 		wheels();
 		limits = lift(limits);
-		badger();
 
 		wait1Msec(25);
 	}
