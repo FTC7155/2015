@@ -254,7 +254,6 @@ task main() { //Main task for code
 
 	playSound(soundFastUpwardTones);
 
-	startTask(intake);
 	startTask(hook);
 	startTask(badger);
 
