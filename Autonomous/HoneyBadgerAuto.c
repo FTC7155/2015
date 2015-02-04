@@ -54,10 +54,25 @@ void setLift (int target) {
 	}
 }
 
+void pid (float Kp, float Ki, float Kd, float targetValue, float sensorReading) {
+	float error, float speed, float integral, float derivative;
+
+	//P
+	error = targetValue - sensorReading;
+	integral += error;
+
+	if(error == 0)
+			integral = 0;
+
+	speed = Kp*error +Ki*integral;
+
+
+}
+
 void driveOffRamp () {
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
-
+}
 
 task main()
 {

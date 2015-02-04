@@ -44,8 +44,8 @@ void putHookUp () {
 }
 
 void putHookDown() {
-	servo[leftHook]=50;
-	servo[rightHook]=173;
+	servo[leftHook]=0;
+	servo[rightHook]=255;
 }
 
 //Task to control all the movement of the hook for the robot during tele-op
@@ -211,7 +211,6 @@ void fun () {
 task badger {
 	bool badgerOn = false;
 	bool badgerIn = false;
-
 	//Loop this part of the code forever
 	while(true) {
 		if(joy1Btn(Btn8)&&!badgerOn) {
