@@ -7,7 +7,7 @@
 #pragma config(Motor,  mtr_S1_C1_1,     intake,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     pretake,       tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, PIDControl, encoder)
-#pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S2_C2_1,     rightWheel1,   tmotorTetrix, openLoop, encoder)
@@ -42,7 +42,6 @@ void putHookUp () {
 	servo[leftHook]=207;				//Set left hook to up position
 	servo[rightHook]=52;				//Set right hook to up position
 }
-\
 
 void putHookDown() {
 	servo[leftHook]=73;
