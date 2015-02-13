@@ -67,11 +67,37 @@ void pid (float Kp, float Ki, float Kd, float targetValue, float sensorReading) 
 	speed = Kp*error +Ki*integral;
 
 
+
+
 }
 
 void driveOffRamp () {
 	nMotorEncoder[leftWheel1] = 0;
 	nMotorEncoder[rightWheel1] = 0;
+	
+	float Kp = 0.5;
+	float Ki = 0.2;
+	float Kd = 0.1;
+	int targetValue = 1000; //Calib Needed
+	float error, speed, integral, derivative, previousError = 0;
+	while(true) {
+		//P
+		error = targetValue - nMotorEncoder[leftWheel1];
+		
+		//I
+		integral += error;
+
+		if(error = 0 || abs(error) > 40)
+			integral=0;
+
+		//D
+		derivative = error-previousError;
+
+		previousError = error;
+
+		setAllWheels(Kp * error + Ki * integral + Kd * derivative);
+	}
+
 }
 
 task main()
