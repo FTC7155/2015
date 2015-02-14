@@ -284,6 +284,7 @@ task main() { //Main task for code
 
 	waitForStart();
 
+
 	playSound(soundFastUpwardTones);
 
 	startTask(hook);

@@ -6,7 +6,7 @@
 #pragma config(Sensor, S3,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     intake,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     pretake,       tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, PIDControl, encoder)
+#pragma config(Motor,  mtr_S1_C2_1,     lift1,         tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S1_C2_2,     lift2,         tmotorTetrix, openLoop, encoder)
 #pragma config(Motor,  mtr_S2_C1_1,     leftWheel1,    tmotorTetrix, openLoop, reversed, encoder)
 #pragma config(Motor,  mtr_S2_C1_2,     leftWheel2,    tmotorTetrix, openLoop, encoder)
@@ -76,89 +76,60 @@ void setLift (int target) {
 	}
 }
 
-void driveOffRamp () {
+void driveStraight (int distance) {
 	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-
-	float Kp = 0.5;
-	float Ki = 0.2;
-	float Kd = 0.1;
-	int targetValue = -100; //Calib Needed
-	float error, speed, integral, derivative, previousError = 0;
-	while(true) {
-		//P
-		error = targetValue - nMotorEncoder[leftWheel1];
-
-		//I
-		integral += error;
-
-		if(error == 0 || abs(error) > 40)
-			integral=0;
-
-		//D
-		derivative = error-previousError;
-
-		previousError = error;
-
-		setAllWheels(Kp * error + Ki * integral + Kd * derivative);
+	nMotorEncoder[rightWheel2] = 0;
+	int thirds = distance/3;
+	int traveled = thirds;
+	while(nMotorEncoder[rightWheel2]<traveled) {
+		setAllRightWheels(50);
+		setAllLeftWheels(43);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
+	}
+	traveled+=thirds;
+	while(nMotorEncoder[rightWheel2]<traveled) {
+		setAllLeftWheels(20);
+		setAllRightWheels(25);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
+	}
+	traveled+=thirds;
+	while(nMotorEncoder[rightWheel2]<traveled) {
+		setAllLeftWheels(7);
+		setAllRightWheels(10);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
 	}
 }
 
-void backIntoGoal () {
+void driveBackwards (int distance) {
 	nMotorEncoder[leftWheel1] = 0;
-	nMotorEncoder[rightWheel1] = 0;
-
-	float Kp = 0.5;
-	float Ki = 0.2;
-	float Kd = 0.1;
-	int targetValue = -100; //Calib Needed
-	float error, speed, integral, derivative, previousError = 0;
-	while(true) {
-		//P
-		error = targetValue - nMotorEncoder[leftWheel1];
-
-		//I
-		integral += error;
-
-		if(error == 0 || abs(error) > 40)
-			integral=0;
-
-		//D
-		derivative = error-previousError;
-
-		previousError = error;
-
-		setAllWheels(Kp * error + Ki * integral + Kd * derivative);
+	nMotorEncoder[rightWheel2] = 0;
+	int fifths = distance/5;
+	int traveled =	0 - fifths;
+	while(nMotorEncoder[rightWheel2]>traveled) {
+		setAllRightWheels(-50);
+		setAllLeftWheels(-43);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
+	}
+	traveled-=2*fifths;
+	while(nMotorEncoder[rightWheel2]>traveled) {
+		setAllLeftWheels(-20);
+		setAllRightWheels(-25);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
+	}
+	traveled-=2*fifths;
+	while(nMotorEncoder[rightWheel2]>traveled) {
+		setAllLeftWheels(-7);
+		setAllRightWheels(-10);
+		displayCenteredTextLine(1, "%d, %d", nMotorEncoder[rightWheel2], traveled);
 	}
 }
+
 
 void putUpLift() {
 	nMotorEncoder[lift1] = 0;
 
-	float Kp = 0.5;
-	float Ki = 0.2;
-	float Kd = 0.1;
-	int targetValue = -100; //Calib Needed
-	float error, speed, integral, derivative, previousError = 0;
-	while(true) {
-		//P
-		error = targetValue - nMotorEncoder[leftWheel1];
-
-		//I
-		integral += error;
-
-		if(error == 0 || abs(error) > 40)
-			integral=0;
-
-		//D
-		derivative = error-previousError;
-
-		previousError = error;
-
-		speed = Kp * error + Ki * integral + Kd * derivative;
-
-		motor[lift1] = speed;
-		motor[lift2] = speed;
+	while(nMotorEncoder[lift1]<5000){
+		setAllLifts(100);
 	}
 }
 
@@ -198,14 +169,15 @@ void moveToParkingZone() {
 
 task main()
 {
-	waterspoutStart();
-	waitForStart();
-	driveOffRamp();
-	putUpLift();
+	waterspoutCatch();
 	putHookUp();
-	backIntoGoal();
+	waitForStart();
+	driveBackwards(5000);
+	putUpLift();
+	driveBackwards(500);
 	putHookDown();
+	setAllWheels(0);
 	waterspoutRelease();
-	turnToParkingZone();
-	moveToParkingZone();
+	setAllLifts(0);
+	wait1Msec(3000);
 }
