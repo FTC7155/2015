@@ -2,3 +2,6 @@ language: c
 compiler:
   - clang
   - gcc
+scripts:
+  - Autonomous/DoNothing.c
+  - Autonomous/DriveStraight.c
