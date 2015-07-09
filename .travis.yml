@@ -3,5 +3,5 @@ compiler:
   - clang
   - gcc
 scripts:
-  - Autonomous/DoNothing.c
-  - Autonomous/DriveStraight.c
+  - scons Autonomous/DoNothing.c
+  - scons Autonomous/DriveStraight.c
