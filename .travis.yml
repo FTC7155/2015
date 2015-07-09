@@ -1,7 +1,1 @@
 language: c
-compiler:
-  - clang
-  - gcc
-scripts:
-  - scons Autonomous/DoNothing.c
-  - scons Autonomous/DriveStraight.c
